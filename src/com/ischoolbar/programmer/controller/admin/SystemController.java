@@ -1,8 +1,11 @@
 package com.ischoolbar.programmer.controller.admin;
 
+import com.ischoolbar.programmer.entity.admin.ClientUser;
 import com.ischoolbar.programmer.entity.admin.User;
+import com.ischoolbar.programmer.service.admin.ClientUserService;
 import com.ischoolbar.programmer.service.admin.UserService;
 import com.ischoolbar.programmer.util.CpachaUtil;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,8 @@ public class SystemController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ClientUserService clientUserService;
 
     /**
      * 主页面
@@ -135,7 +140,7 @@ public class SystemController {
         User currentUser = userService.findByUserName(user.getUsername());
         if (currentUser == null){
             ret.put("type","error");
-            ret.put("msg","改用户名不存在!");
+            ret.put("msg","用户名不存在!");
             return ret;
         }
         if (!user.getPassword().equals(currentUser.getPassword())){
@@ -146,6 +151,65 @@ public class SystemController {
         request.getSession().setAttribute("admin",currentUser);
         ret.put("type","success");
         ret.put("msg","登录成功!");
+        return ret;
+    }
+
+    /**
+     * 客户端登录申请
+     * @param clientUser 客户端用户
+     * @return 返回信息
+     */
+    @RequestMapping(value = "/clientUserLogin",method = RequestMethod.POST)
+    @ResponseBody
+    public  JSONObject clientUserLoginAction(JSONObject clientUser){
+        JSONObject ret = new JSONObject();
+        String username = clientUser.getString("username");
+        String password = clientUser.getString("password");
+
+        ClientUser mClientUser = clientUserService.findByUserName(username);
+        if (mClientUser == null){
+            ret.put("type","error");
+            ret.put("msg","用户不存在!");
+            return ret;
+        }
+        if (!mClientUser.getUserPassword().equals(password)){
+            ret.put("type","error");
+            ret.put("msg","密码错误!");
+            return ret;
+        }
+
+        ret.put("type","success");
+        ret.put("id",mClientUser.getId());
+        ret.put("phone",mClientUser.getPhone());
+        return ret;
+    }
+
+    @RequestMapping(value = "/clientUserSignUp",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject clientUserSignUpAction(JSONObject clientUser){
+        JSONObject ret = new JSONObject();
+        String username = clientUser.getString("username");
+        String password = clientUser.getString("password");
+        String phone = clientUser.getString("phone");
+
+        ClientUser mClientUser = clientUserService.findByUserName(username);
+        if (mClientUser != null){
+            ret.put("type","error");
+            ret.put("msg","用户已存在!");
+            return ret;
+        }
+        mClientUser = clientUserService.findByPhone(phone);
+        if (mClientUser != null){
+            ret.put("type","error");
+            ret.put("msg","手机号已注册!");
+            return ret;
+        }
+
+        mClientUser = new ClientUser();
+        mClientUser.setUsername(username);
+        mClientUser.setUserPassword(password);
+        mClientUser.setPhone(phone);
+
         return ret;
     }
 }

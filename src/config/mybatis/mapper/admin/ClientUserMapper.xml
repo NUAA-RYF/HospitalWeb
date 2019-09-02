@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http:mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ischoolbar.programmer.dao.admin.ClientUserDao">
+    <select id="findByUserName" parameterType="String" resultType="ClientUser">
+        select * from clientUser where username = #{username}
+    </select>
+    <select id="findByPhone" parameterType="String" resultType="ClientUser">
+        select * from clientUser where username = #{phone}
+    </select>
+    <insert id="saveClientUser" parameterType="">
+        insert into clientUser values()
+    </insert>
+</mapper>
