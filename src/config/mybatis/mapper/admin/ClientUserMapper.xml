@@ -9,7 +9,7 @@
     <select id="findByPhone" parameterType="String" resultType="ClientUser">
         select * from clientUser where username = #{phone}
     </select>
-    <insert id="saveClientUser" parameterType="">
-        insert into clientUser values()
+    <insert id="saveClientUser" parameterType="clientUser">
+        insert into clientUser(id,username,userPassword,phone) values(null,#{username},#{userPassword},#{phone})
     </insert>
 </mapper>

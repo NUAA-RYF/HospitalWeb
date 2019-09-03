@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface ClientUserDao {
     ClientUser findByUserName(String username);
     ClientUser findByPhone(String phone);
-    boolean saveClientUser(ClientUser clientUser);
+    int saveClientUser(ClientUser clientUser);
 }

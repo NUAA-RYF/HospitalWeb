@@ -24,9 +24,7 @@ public class ClientUserServiceImpl implements ClientUserService {
     }
 
     @Override
-    public boolean saveClientUser(ClientUser clientUser) {
-        clientUserDao.saveClientUser(clientUser);
-
-        return false;
+    public int saveClientUser(ClientUser clientUser) {
+        return clientUserDao.saveClientUser(clientUser);
     }
 }

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 public interface ClientUserService {
     ClientUser findByUserName(String username);
     ClientUser findByPhone(String phone);
-    boolean saveClientUser(ClientUser clientUser);
+    int saveClientUser(ClientUser clientUser);
 }

@@ -5,13 +5,11 @@ import com.ischoolbar.programmer.entity.admin.User;
 import com.ischoolbar.programmer.service.admin.ClientUserService;
 import com.ischoolbar.programmer.service.admin.UserService;
 import com.ischoolbar.programmer.util.CpachaUtil;
+
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -56,17 +54,6 @@ public class SystemController {
     @RequestMapping(value = "/license",method = RequestMethod.GET)
     public ModelAndView license(ModelAndView model){
         model.setViewName("system/license");
-        return model;
-    }
-
-    /**
-     * 欢迎页面
-     * @param model 模型和视图
-     * @return 返回视图
-     */
-    @RequestMapping(value = "/welcome",method = RequestMethod.GET)
-    public ModelAndView welcome(ModelAndView model){
-        model.setViewName("system/welcome");
         return model;
     }
 
@@ -154,18 +141,18 @@ public class SystemController {
         return ret;
     }
 
-    /**
-     * 客户端登录申请
-     * @param clientUser 客户端用户
-     * @return 返回信息
-     */
-    @RequestMapping(value = "/clientUserLogin",method = RequestMethod.POST)
-    @ResponseBody
-    public  JSONObject clientUserLoginAction(JSONObject clientUser){
-        JSONObject ret = new JSONObject();
-        String username = clientUser.getString("username");
-        String password = clientUser.getString("password");
 
+    /**
+     * 客户端账号密码登录
+     * @param username 用户名
+     * @param password 密码
+     * @return 成功返回JSON格式字符串
+     * clientUserLogin?username=?&password=?
+     */
+    @RequestMapping(value = "/clientUserLogin",method = RequestMethod.GET)
+    @ResponseBody
+    public  JSONObject clientUserLoginAction(String username,String password){
+        JSONObject ret = new JSONObject();
         ClientUser mClientUser = clientUserService.findByUserName(username);
         if (mClientUser == null){
             ret.put("type","error");
@@ -180,17 +167,25 @@ public class SystemController {
 
         ret.put("type","success");
         ret.put("id",mClientUser.getId());
+        ret.put("username",mClientUser.getUsername());
+        ret.put("password",mClientUser.getUserPassword());
         ret.put("phone",mClientUser.getPhone());
         return ret;
     }
 
-    @RequestMapping(value = "/clientUserSignUp",method = RequestMethod.POST)
+
+    /**
+     * 客户端账号注册
+     * @param username 用户名
+     * @param password 密码
+     * @param phone    手机号
+     * @return 返回JSON格式字符串
+     * clientUserSignUp?username=?&password=?&phone=?
+     */
+    @RequestMapping(value = "/clientUserSignUp",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject clientUserSignUpAction(JSONObject clientUser){
+    public JSONObject clientUserSignUpAction(String username,String password,String phone){
         JSONObject ret = new JSONObject();
-        String username = clientUser.getString("username");
-        String password = clientUser.getString("password");
-        String phone = clientUser.getString("phone");
 
         ClientUser mClientUser = clientUserService.findByUserName(username);
         if (mClientUser != null){
@@ -209,7 +204,17 @@ public class SystemController {
         mClientUser.setUsername(username);
         mClientUser.setUserPassword(password);
         mClientUser.setPhone(phone);
+        int result = clientUserService.saveClientUser(mClientUser);
+        if (result <= 0){
+            ret.put("type","error");
+            ret.put("msg","注册失败!");
+            return ret;
+        }
 
+        mClientUser = clientUserService.findByUserName(username);
+        ret.put("type","success");
+        ret.put("msg","注册成功!");
+        ret.put("id",mClientUser.getId());
         return ret;
     }
 }
