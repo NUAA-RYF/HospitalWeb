@@ -159,16 +159,16 @@ public class SystemController {
             ret.put("msg","用户不存在!");
             return ret;
         }
-        if (!mClientUser.getUserPassword().equals(password)){
+
+        if (!password.equals(mClientUser.getPassword())){
             ret.put("type","error");
             ret.put("msg","密码错误!");
             return ret;
         }
-
         ret.put("type","success");
         ret.put("id",mClientUser.getId());
         ret.put("username",mClientUser.getUsername());
-        ret.put("password",mClientUser.getUserPassword());
+        ret.put("password",mClientUser.getPassword());
         ret.put("phone",mClientUser.getPhone());
         return ret;
     }
@@ -186,13 +186,16 @@ public class SystemController {
     @ResponseBody
     public JSONObject clientUserSignUpAction(String username,String password,String phone){
         JSONObject ret = new JSONObject();
-
+        System.out.println("username: " + username + "  password: " + password + "  phone: " + phone);
         ClientUser mClientUser = clientUserService.findByUserName(username);
         if (mClientUser != null){
             ret.put("type","error");
             ret.put("msg","用户已存在!");
             return ret;
         }
+
+
+
         mClientUser = clientUserService.findByPhone(phone);
         if (mClientUser != null){
             ret.put("type","error");
@@ -202,7 +205,7 @@ public class SystemController {
 
         mClientUser = new ClientUser();
         mClientUser.setUsername(username);
-        mClientUser.setUserPassword(password);
+        mClientUser.setPassword(password);
         mClientUser.setPhone(phone);
         int result = clientUserService.saveClientUser(mClientUser);
         if (result <= 0){

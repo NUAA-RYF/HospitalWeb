@@ -3,13 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http:mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ischoolbar.programmer.dao.admin.ClientUserDao">
+    <!-- 按用户名查找用户 -->
     <select id="findByUserName" parameterType="String" resultType="ClientUser">
-        select * from clientUser where username = #{username}
+        select * from tb_clientUser where username = #{username}
     </select>
+
+    <!-- 按手机号查找用户 -->
     <select id="findByPhone" parameterType="String" resultType="ClientUser">
-        select * from clientUser where username = #{phone}
+        select * from tb_clientUser where phone = #{phone}
     </select>
-    <insert id="saveClientUser" parameterType="clientUser">
-        insert into clientUser(id,username,userPassword,phone) values(null,#{username},#{userPassword},#{phone})
+
+    <!-- 按用户类保存用户信息 -->
+    <insert id="saveClientUser" parameterType="ClientUser">
+        insert into tb_clientUser(id,username,password,phone) values(null,#{username},#{userPassword},#{phone})
     </insert>
 </mapper>

@@ -1,9 +1,12 @@
 package com.ischoolbar.programmer.entity.admin;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ClientUser {
     private long id;
     private String username;
-    private String userPassword;
+    private String password;
     private String phone;
 
     public long getId() {
@@ -22,12 +25,12 @@ public class ClientUser {
         this.username = username;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
