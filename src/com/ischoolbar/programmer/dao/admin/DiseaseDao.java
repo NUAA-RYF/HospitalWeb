@@ -9,6 +9,13 @@ import java.util.List;
 public interface DiseaseDao {
 
     /**
+     * 按疾病ID修改疾病信息
+     * @param disease 疾病信息
+     * @return        返回信息
+     */
+    int updateDiseaseInfoById(Disease disease);
+
+    /**
      * 查询全部疾病信息
      * @return 返回疾病信息
      */

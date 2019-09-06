@@ -17,6 +17,7 @@ public class ClientController {
     @Autowired
     private ClientUserService clientUserService;
 
+
     /**
      * 查询所有用户信息
      * @return 用户信息列表
@@ -27,6 +28,7 @@ public class ClientController {
     public JSONObject findAllClientUser(){
         return clientUserService.findAllUser();
     }
+
     /**
      * 客户端账号密码登录
      * @param username 用户名

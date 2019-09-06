@@ -1,10 +1,10 @@
 package com.ischoolbar.programmer.controller.admin;
 
-import com.ischoolbar.programmer.entity.admin.Disease;
 import com.ischoolbar.programmer.service.admin.DiseaseService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +18,17 @@ public class DiseaseController {
     private DiseaseService diseaseService;
 
 
+    /**
+     * 按疾病ID修改疾病信息
+     * @param disease 疾病信息
+     * @return        返回信息
+     * /disease/updateInfo/
+     */
+    @RequestMapping(value = "/updateInfo/{disease}",method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject updateDiseaseInfoById(@PathVariable String disease){
+        return diseaseService.updateDiseaseInfoById(disease);
+    }
 
     /**
      * 查询全部疾病信息
@@ -29,6 +40,7 @@ public class DiseaseController {
     public JSONObject findAllDiseaseInfo(){
         return diseaseService.findAllDiseaseInfo();
     }
+
     /**
      * 按用户名查找疾病信息
      * @param username 用户名
@@ -47,7 +59,7 @@ public class DiseaseController {
      * @return 返回信息
      * /disease/deleteById?id=?
      */
-    @RequestMapping(value = "/deleteById",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteInfo",method = RequestMethod.GET)
     @ResponseBody
     public JSONObject deleteDiseaseInfoById(String id){
         return diseaseService.deleteDiseaseInfoById(Integer.parseInt(id));
@@ -56,31 +68,13 @@ public class DiseaseController {
 
     /**
      * 添加疾病信息
-     * @param username 用户名
-     * @param name 患者姓名
-     * @param phone 手机号
-     * @param gender 性别
-     * @param address 地址
-     * @param diseaseName 疾病名称
-     * @param diseaseInfo 疾病信息
-     * @return 返回提示信息
-     * /disease/addInfo?username=?&name=?&phone=?&gender=?&address=?&diseaseName=?&diseaseInfo=?
+     * @param disease 疾病信息
+     * @return        返回信息
      */
-    @RequestMapping(value = "/addInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/addInfo/{disease}",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject saveDiseaseInfo(String username,String name,
-                                      String phone, String gender,
-                                      String address,String diseaseName,String diseaseInfo){
-        Disease disease = new Disease();
-        disease.setUsername(username);
-        disease.setName(name);
-        disease.setPhone(phone);
-        disease.setGender(gender);
-        disease.setAddress(address);
-        disease.setDiseaseName(diseaseName);
-        disease.setDiseaseInfo(diseaseInfo);
+    public JSONObject saveDiseaseInfo(@PathVariable String disease){
         return diseaseService.saveDiseaseInfo(disease);
     }
-
 
 }

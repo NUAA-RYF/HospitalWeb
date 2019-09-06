@@ -29,6 +29,7 @@
 
     <!-- 按用户类保存用户信息 -->
     <insert id="saveClientUser" parameterType="ClientUser">
-        insert into tb_clientUser(id,username,password,phone) values(null,#{username},#{password},#{phone})
+        insert into tb_clientUser(id,username,password,phone)
+        values(null,#{username},#{password},#{phone})
     </insert>
 </mapper>

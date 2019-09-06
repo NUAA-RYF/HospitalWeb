@@ -1,5 +1,6 @@
 package com.ischoolbar.programmer.service.admin.impl;
 
+import com.google.gson.Gson;
 import com.ischoolbar.programmer.dao.admin.DiseaseDao;
 import com.ischoolbar.programmer.entity.admin.Disease;
 import com.ischoolbar.programmer.service.admin.DiseaseService;
@@ -15,6 +16,27 @@ public class DiseaseServiceImpl implements DiseaseService {
 
     @Autowired
     private DiseaseDao diseaseDao;
+
+
+    /**
+     * 按疾病ID修改疾病信息
+     * @param diseaseInfo 疾病信息
+     * @return            返回信息
+     */
+    @Override
+    public JSONObject updateDiseaseInfoById(String diseaseInfo) {
+        JSONObject ret = new JSONObject();
+        Disease disease = new Gson().fromJson(diseaseInfo,Disease.class);
+        int result = diseaseDao.updateDiseaseInfoById(disease);
+        if (result <= 0){
+            ret.put("type","error");
+            ret.put("msg","修改信息失败!");
+            return ret;
+        }
+        ret.put("type","success");
+        ret.put("msg","修改信息成功!");
+        return ret;
+    }
 
     /**
      * 查询全部疾病信息
@@ -69,14 +91,16 @@ public class DiseaseServiceImpl implements DiseaseService {
         return ret;
     }
 
+
     /**
      * 添加疾病信息
-     * @param disease 疾病信息类
-     * @return        返回是否添加成功
+     * @param diseaseInfo 疾病信息
+     * @return            返回信息
      */
     @Override
-    public JSONObject saveDiseaseInfo(Disease disease) {
+    public JSONObject saveDiseaseInfo(String diseaseInfo) {
         JSONObject ret = new JSONObject();
+        Disease disease = new Gson().fromJson(diseaseInfo,Disease.class);
         int result = diseaseDao.saveDiseaseInfo(disease);
         if (result <= 0){
             ret.put("type","error");
@@ -97,15 +121,7 @@ public class DiseaseServiceImpl implements DiseaseService {
     private JSONObject getDiseaseList(JSONObject ret, List<Disease> diseaseList) {
         JSONArray result = new JSONArray();
         for (Disease disease : diseaseList) {
-            JSONObject object = new JSONObject();
-            object.put("id", disease.getId());
-            object.put("username", disease.getUsername());
-            object.put("name", disease.getName());
-            object.put("phone", disease.getPhone());
-            object.put("gender", disease.getGender());
-            object.put("address", disease.getAddress());
-            object.put("diseaseName", disease.getDiseaseName());
-            object.put("diseaseInfo", disease.getDiseaseInfo());
+            JSONObject object = JSONObject.fromObject(new Gson().toJson(disease));
             result.add(object);
         }
         ret.put("type","success");
