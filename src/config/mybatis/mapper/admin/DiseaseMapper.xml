@@ -3,11 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http:mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ischoolbar.programmer.dao.admin.DiseaseDao">
+
     <!-- 疾病信息列表 -->
     <resultMap id="diseaseResultMap" type="Disease">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="name" property="name"/>
+        <result column="age" property="age"/>
         <result column="phone" property="phone"/>
         <result column="gender" property="gender"/>
         <result column="address" property="address"/>
@@ -20,6 +22,7 @@
         update tb_disease
         set username = #{username},
         name = #{name},
+        age = #{age},
         phone = #{phone},
         gender = #{gender},
         address = #{address},
@@ -45,7 +48,7 @@
 
     <!-- 插入疾病信息 -->
     <insert id="saveDiseaseInfo" parameterType="Disease">
-        insert into tb_disease(id,username,name,phone,gender,address,diseaseName,diseaseInfo)
-        values(null,#{username},#{name},#{phone},#{gender},#{address},#{diseaseName},#{diseaseInfo})
+        insert into tb_disease(id,username,name,age,phone,gender,address,diseaseName,diseaseInfo)
+        values(null,#{username},#{name},#{age},#{phone},#{gender},#{address},#{diseaseName},#{diseaseInfo})
     </insert>
 </mapper>

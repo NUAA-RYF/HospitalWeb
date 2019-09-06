@@ -8,6 +8,7 @@ public class Disease {
     private long id;
     private String username;
     private String name;
+    private String age;
     private String phone;
     private String gender;
     private String address;
@@ -36,6 +37,14 @@ public class Disease {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public String getPhone() {
