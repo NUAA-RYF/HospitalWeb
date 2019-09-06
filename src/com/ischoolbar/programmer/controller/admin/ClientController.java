@@ -18,11 +18,21 @@ public class ClientController {
     private ClientUserService clientUserService;
 
     /**
+     * 查询所有用户信息
+     * @return 用户信息列表
+     * /client/findAll
+     */
+    @RequestMapping(value = "/findAll")
+    @ResponseBody
+    public JSONObject findAllClientUser(){
+        return clientUserService.findAllUser();
+    }
+    /**
      * 客户端账号密码登录
      * @param username 用户名
      * @param password 密码
      * @return 成功返回JSON格式字符串
-     * clientUserLogin?username=?&password=?
+     * /client/clientUserLogin?username=?&password=?
      */
     @RequestMapping(value = "/clientUserLogin",method = RequestMethod.GET)
     @ResponseBody
@@ -54,7 +64,7 @@ public class ClientController {
      * @param password 密码
      * @param phone    手机号
      * @return 返回JSON格式字符串
-     * clientUserSignUp?username=?&password=?&phone=?
+     * /client/clientUserSignUp?username=?&password=?&phone=?
      */
     @RequestMapping(value = "/clientUserSignUp",method = RequestMethod.GET)
     @ResponseBody

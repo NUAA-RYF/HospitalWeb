@@ -1,10 +1,15 @@
 package com.ischoolbar.programmer.dao.admin;
 
 import com.ischoolbar.programmer.entity.admin.ClientUser;
+import com.ischoolbar.programmer.entity.admin.User;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ClientUserDao {
+
+    List<ClientUser> findAllUser();
     /**
      * 按用户名查找用户
      * @param username 用户名

@@ -3,6 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http:mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ischoolbar.programmer.dao.admin.ClientUserDao">
+
+    <!-- 用户信息列表 -->
+    <resultMap id="userResultMap" type="ClientUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+    </resultMap>
+
+    <!-- 查找所有用户 -->
+    <select id="findAllUser" resultMap="userResultMap">
+        select * from tb_clientUser
+    </select>
+
     <!-- 按用户名查找用户 -->
     <select id="findByUserName" parameterType="String" resultType="ClientUser">
         select * from tb_clientUser where username = #{username}

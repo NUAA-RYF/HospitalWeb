@@ -1,10 +1,16 @@
 package com.ischoolbar.programmer.service.admin;
 
 import com.ischoolbar.programmer.entity.admin.ClientUser;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface ClientUserService {
+    /**
+     * 查询所有用户信息
+     * @return 返回用户信息
+     */
+    JSONObject findAllUser();
     /**
      * 按用户名查找用户
      * @param username 用户名

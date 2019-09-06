@@ -9,23 +9,29 @@ import java.util.List;
 public interface DiseaseDao {
 
     /**
+     * 查询全部疾病信息
+     * @return 返回疾病信息
+     */
+    List<Disease> findAllDiseaseInfo();
+
+    /**
      * 按用户名查找疾病信息
      * @param username 用户名
      * @return 返回疾病信息列表
      */
-    List<Disease> findByUserName(String username);
+    List<Disease> findDiseaseInfoByUserName(String username);
 
     /**
      * 按疾病ID删除疾病信息
      * @param id 疾病ID
      * @return 返回是否删除成功
      */
-    int deleteById(int id);
+    int deleteDiseaseInfoById(int id);
 
     /**
      * 添加疾病信息
      * @param disease 疾病信息类
      * @return 返回是否添加成功
      */
-    int addInfo(Disease disease);
+    int saveDiseaseInfo(Disease disease);
 }

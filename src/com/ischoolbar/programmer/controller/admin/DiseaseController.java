@@ -2,16 +2,12 @@ package com.ischoolbar.programmer.controller.admin;
 
 import com.ischoolbar.programmer.entity.admin.Disease;
 import com.ischoolbar.programmer.service.admin.DiseaseService;
-
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/disease")
@@ -21,6 +17,18 @@ public class DiseaseController {
     @Autowired
     private DiseaseService diseaseService;
 
+
+
+    /**
+     * 查询全部疾病信息
+     * @return 返回疾病信息
+     * /disease/findAll
+     */
+    @RequestMapping("/findAll")
+    @ResponseBody
+    public JSONObject findAllDiseaseInfo(){
+        return diseaseService.findAllDiseaseInfo();
+    }
     /**
      * 按用户名查找疾病信息
      * @param username 用户名
@@ -29,33 +37,8 @@ public class DiseaseController {
      */
     @RequestMapping(value = "/findInfoByUserName",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject findInfoByUserName(String username){
-        JSONObject ret = new JSONObject();
-        System.out.println("1");
-        List<Disease> diseaseList = diseaseService.findByUserName(username);
-        System.out.println("2");
-        if (diseaseList.size() <= 0) {
-            ret.put("type","error");
-            ret.put("msg","暂无病情信息!");
-            return ret;
-        }
-        System.out.println("3");
-        JSONArray result = new JSONArray();
-        for (Disease disease : diseaseList) {
-            JSONObject object = new JSONObject();
-            object.put("username", disease.getUsername());
-            object.put("name", disease.getName());
-            object.put("phone", disease.getPhone());
-            object.put("gender", disease.getGender());
-            object.put("address", disease.getAddress());
-            object.put("diseaseName", disease.getDiseaseName());
-            object.put("diseaseInfo", disease.getDiseaseInfo());
-            result.add(object);
-        }
-        System.out.println("4");
-        ret.put("type","success");
-        ret.put("result",result);
-        return ret;
+    public JSONObject findDiseaseInfoByUserName(String username){
+        return diseaseService.findDiseaseInfoByUserName(username);
     }
 
     /**
@@ -66,19 +49,8 @@ public class DiseaseController {
      */
     @RequestMapping(value = "/deleteById",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject deleteById(String id){
-        JSONObject ret = new JSONObject();
-        System.out.println("1");
-        int result = diseaseService.deleteById(Integer.parseInt(id));
-        System.out.println("2");
-        if (result <=0){
-            ret.put("type","error");
-            ret.put("msg","删除信息失败!");
-            return ret;
-        }
-        ret.put("type","success");
-        ret.put("msg","删除信息成功!");
-        return ret;
+    public JSONObject deleteDiseaseInfoById(String id){
+        return diseaseService.deleteDiseaseInfoById(Integer.parseInt(id));
     }
 
 
@@ -96,28 +68,19 @@ public class DiseaseController {
      */
     @RequestMapping(value = "/addInfo",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject addInfo(String username,String name,String phone,
-                              String gender,String address,String diseaseName,String diseaseInfo){
-        JSONObject ret = new JSONObject();
-        Disease newDisease = new Disease();
-        newDisease.setUsername(username);
-        newDisease.setName(name);
-        newDisease.setPhone(phone);
-        newDisease.setGender(gender);
-        newDisease.setAddress(address);
-        newDisease.setDiseaseName(diseaseName);
-        newDisease.setDiseaseInfo(diseaseInfo);
-        System.out.println("1");
-        int result = diseaseService.addInfo(newDisease);
-        System.out.println("2");
-        if (result <= 0){
-            ret.put("type","error");
-            ret.put("msg","添加信息失败!");
-            return ret;
-        }
-
-        ret.put("type","error");
-        ret.put("msg","添加信息成功!");
-        return ret;
+    public JSONObject saveDiseaseInfo(String username,String name,
+                                      String phone, String gender,
+                                      String address,String diseaseName,String diseaseInfo){
+        Disease disease = new Disease();
+        disease.setUsername(username);
+        disease.setName(name);
+        disease.setPhone(phone);
+        disease.setGender(gender);
+        disease.setAddress(address);
+        disease.setDiseaseName(diseaseName);
+        disease.setDiseaseInfo(diseaseInfo);
+        return diseaseService.saveDiseaseInfo(disease);
     }
+
+
 }
