@@ -7,7 +7,12 @@ import java.util.List;
 
 @Repository
 public interface DiseaseDao {
-
+    /**
+     * 按疾病ID查询疾病信息
+     * @param id 疾病ID
+     * @return   返回信息
+     */
+    Disease findDiseaseInfoById(int id);
     /**
      * 按疾病ID修改疾病信息
      * @param disease 疾病信息

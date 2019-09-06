@@ -19,6 +19,27 @@ public class DiseaseServiceImpl implements DiseaseService {
 
 
     /**
+     * 按疾病ID查询疾病信息
+     * @param id 疾病ID
+     * @return   返回信息
+     */
+    @Override
+    public JSONObject findDiseaseInfoById(String id) {
+        JSONObject ret = new JSONObject();
+        Disease disease = diseaseDao.findDiseaseInfoById(Integer.parseInt(id));
+        if (disease == null){
+            ret.put("type","error");
+            ret.put("msg","疾病列表为空!");
+            return ret;
+        }
+        JSONObject result = JSONObject.fromObject(new Gson().toJson(disease));
+        ret.put("type","success");
+        ret.put("msg","查询成功!");
+        ret.put("result",result);
+        return ret;
+    }
+
+    /**
      * 按疾病ID修改疾病信息
      * @param diseaseInfo 疾病信息
      * @return            返回信息

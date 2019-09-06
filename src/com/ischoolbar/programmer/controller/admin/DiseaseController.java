@@ -19,6 +19,17 @@ public class DiseaseController {
 
 
     /**
+     * 按疾病ID查询疾病信息
+     * @param id 疾病ID
+     * @return   返回信息
+     */
+    @RequestMapping(value = "/findInfoById",method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject findDiseaseInfoById(String id){
+        return diseaseService.findDiseaseInfoById(id);
+    }
+
+    /**
      * 按疾病ID修改疾病信息
      * @param disease 疾病信息
      * @return        返回信息
@@ -57,7 +68,7 @@ public class DiseaseController {
      * 按疾病ID删除疾病信息
      * @param id 疾病ID
      * @return 返回信息
-     * /disease/deleteById?id=?
+     * /disease/deleteInfo?id=?
      */
     @RequestMapping(value = "/deleteInfo",method = RequestMethod.GET)
     @ResponseBody
