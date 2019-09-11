@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http:mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ischoolbar.programmer.dao.admin.FriendDao">
+
+    <!-- 好友信息列表 -->
+    <resultMap id="friendResultMap" type="Friend">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="relation" property="relation"/>
+        <result column="close" property="close"/>
+    </resultMap>
+
+    <!-- 按ID修改好友信息 -->
+    <update id="updateFriendByID" parameterType="Friend">
+        update tb_friend
+        set username = #{username},
+        name = #{name},
+        phone = #{phone},
+        relation = #{relation},
+        close = #{close}
+        where id = #{id}
+    </update>
+
+    <!-- 按ID修改关联信息 -->
+    <update id="updateFriendClose" parameterType="Friend">
+        update tb_friend
+        set close = #{close}
+        where id = #{id}
+    </update>
+
+    <!-- 按ID查找好友 -->
+    <select id="findFriendByID" parameterType="int" resultType="Friend">
+        select * from tb_friend where id = #{id}
+    </select>
+
+    <!-- 按用户名查找好友 -->
+    <select id="findFriendListByUserName" parameterType="String" resultMap="friendResultMap">
+        select * from tb_friend where username = #{username}
+    </select>
+
+    <!-- 按ID删除好友信息 -->
+    <delete id="deleteFriendByID" parameterType="int">
+        delete from tb_friend where id = #{id}
+    </delete>
+
+    <!-- 插入好友信息 -->
+    <insert id="insertFriend" parameterType="Friend">
+        insert into tb_friend(id,username,name,phone,relation,close) values(null,#{username},#{name},#{phone},#{relation},#{close})
+    </insert>
+</mapper>
