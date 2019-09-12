@@ -23,7 +23,7 @@ public class DiseaseController {
      * @param id 疾病ID
      * @return   返回信息
      */
-    @RequestMapping(value = "/findInfoById",method = RequestMethod.GET)
+    @RequestMapping(value = "/findInfoById",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject findDiseaseInfoById(String id){
         return diseaseService.findDiseaseInfoById(id);
@@ -33,11 +33,11 @@ public class DiseaseController {
      * 按疾病ID修改疾病信息
      * @param disease 疾病信息
      * @return        返回信息
-     * /disease/updateInfo/
+     * /disease/updateInfo
      */
-    @RequestMapping(value = "/updateInfo/{disease}",method = RequestMethod.GET)
+    @RequestMapping(value = "/updateInfo",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject updateDiseaseInfoById(@PathVariable String disease){
+    public JSONObject updateDiseaseInfoById(String disease){
         return diseaseService.updateDiseaseInfoById(disease);
     }
 
@@ -56,9 +56,9 @@ public class DiseaseController {
      * 按用户名查找疾病信息
      * @param username 用户名
      * @return 返回疾病信息列表
-     * /disease/findInfoByUserName?username=?
+     * /disease/findInfoByUserName
      */
-    @RequestMapping(value = "/findInfoByUserName",method = RequestMethod.GET)
+    @RequestMapping(value = "/findInfoByUserName",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject findDiseaseInfoByUserName(String username){
         return diseaseService.findDiseaseInfoByUserName(username);
@@ -70,7 +70,7 @@ public class DiseaseController {
      * @return 返回信息
      * /disease/deleteInfo?id=?
      */
-    @RequestMapping(value = "/deleteInfo",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteInfo",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject deleteDiseaseInfoById(String id){
         return diseaseService.deleteDiseaseInfoById(Integer.parseInt(id));
@@ -82,9 +82,9 @@ public class DiseaseController {
      * @param disease 疾病信息
      * @return        返回信息
      */
-    @RequestMapping(value = "/addInfo/{disease}",method = RequestMethod.GET)
+    @RequestMapping(value = "/addInfo",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject saveDiseaseInfo(@PathVariable String disease){
+    public JSONObject saveDiseaseInfo(String disease){
         return diseaseService.saveDiseaseInfo(disease);
     }
 

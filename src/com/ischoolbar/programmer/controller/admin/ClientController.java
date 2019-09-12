@@ -34,9 +34,9 @@ public class ClientController {
      * @param username 用户名
      * @param password 密码
      * @return 成功返回JSON格式字符串
-     * /client/clientUserLogin?username=?&password=?
+     * /client/clientUserLogin
      */
-    @RequestMapping(value = "/clientUserLogin",method = RequestMethod.GET)
+    @RequestMapping(value = "/clientUserLogin",method = RequestMethod.POST)
     @ResponseBody
     public  JSONObject clientUserLoginAction(String username,String password){
         JSONObject ret = new JSONObject();
@@ -66,9 +66,9 @@ public class ClientController {
      * @param password 密码
      * @param phone    手机号
      * @return 返回JSON格式字符串
-     * /client/clientUserSignUp?username=?&password=?&phone=?
+     * /client/clientUserSignUp
      */
-    @RequestMapping(value = "/clientUserSignUp",method = RequestMethod.GET)
+    @RequestMapping(value = "/clientUserSignUp",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject clientUserSignUpAction(String username, String password, String phone){
         JSONObject ret = new JSONObject();

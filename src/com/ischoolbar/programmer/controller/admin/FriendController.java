@@ -20,9 +20,9 @@ public class FriendController {
      * 按用户名查找好友列表信息
      * @param username 用户名
      * @return 返回列表信息
-     * /friend/findFriendList?username=?
+     * /friend/findFriendList
      */
-    @RequestMapping(value = "/findFriendList",method = RequestMethod.GET)
+    @RequestMapping(value = "/findFriendList",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject findFriendListByUserName(String username){
         return friendService.findFriendListByUserName(username);
@@ -34,7 +34,7 @@ public class FriendController {
      * @return   返回好友信息
      * /friend/findFriend?id=?
      */
-    @RequestMapping(value = "/findFriend",method = RequestMethod.GET)
+    @RequestMapping(value = "/findFriend",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject findFriendByID(int id){
         return friendService.findFriendByID(id);
@@ -46,9 +46,9 @@ public class FriendController {
      * @return           返回信息
      * /friend/insertFriend/
      */
-    @RequestMapping(value = "/insertFriend/{friendJson}",method = RequestMethod.GET)
+    @RequestMapping(value = "/insertFriend",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject insertFriend(@PathVariable  String friendJson){
+    public JSONObject insertFriend(String friendJson){
         return friendService.insertFriend(friendJson);
     }
 
@@ -58,9 +58,9 @@ public class FriendController {
      * @return           返回信息
      * /friend/updateFriend/
      */
-    @RequestMapping(value = "/updateFriend/{friendJson}",method = RequestMethod.GET)
+    @RequestMapping(value = "/updateFriend",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject updateFriendByID(@PathVariable  String friendJson){
+    public JSONObject updateFriendByID(String friendJson){
         return friendService.updateFriendByID(friendJson);
     }
 
@@ -69,9 +69,9 @@ public class FriendController {
      * @param id    好友ID
      * @param close 关联信息
      * @return      返回信息
-     * /friend/updateFriendClose?id=?&close=?
+     * /friend/updateFriendClose
      */
-    @RequestMapping(value = "/updateFriendClose",method = RequestMethod.GET)
+    @RequestMapping(value = "/updateFriendClose",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject updateFriendClose(int id,boolean close){
         return friendService.updateFriendClose(id,close);
@@ -81,9 +81,9 @@ public class FriendController {
      * 按ID删除好友信息
      * @param id ID
      * @return   返回信息
-     * /friend/deleteFriend?id=?
+     * /friend/deleteFriend
      */
-    @RequestMapping(value = "/deleteFriend",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteFriend",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject deleteFriendByID(int id){
         return friendService.deleteFriendByID(id);
