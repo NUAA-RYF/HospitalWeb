@@ -10,13 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @studentID 161610124
  * @date 2019/8/17 9:58
  */
-@RequestMapping("/admin/menu")
+@RequestMapping("/system")
 @Controller
 public class MenuController {
 
-    @RequestMapping(value = "datalist",method = RequestMethod.GET)
+    @RequestMapping(value = "clientUserList",method = RequestMethod.GET)
     public ModelAndView list(ModelAndView model){
-        model.setViewName("menu/datalist");
+        model.setViewName("system/clientUserList");
         return model;
     }
 }
