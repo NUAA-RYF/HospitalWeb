@@ -114,6 +114,14 @@ public class FriendServiceImpl implements FriendService {
         Friend friend = new Friend();
         friend.setId(id);
         friend.setClose(close);
+        if (close){
+            int result = friendDao.findFriendCountByUserName(friend);
+            if (result >= 5){
+                ret.put("type", "error");
+                ret.put("msg", "关联人数不得超过5人,关联更新失败!");
+                return ret;
+            }
+        }
         int result = friendDao.updateFriendClose(friend);
         if (result <= 0){
             ret.put("type", "error");

@@ -37,6 +37,13 @@
         select * from tb_friend where id = #{id}
     </select>
 
+    <select id="findFriendCountByUserName" parameterType="Friend" resultType="int">
+        select COUNT(*)
+        from tb_friend
+        where username = #{username}
+        and close = #{close}
+    </select>
+
     <!-- 按用户名查找好友 -->
     <select id="findFriendListByUserName" parameterType="String" resultMap="friendResultMap">
         select * from tb_friend where username = #{username}

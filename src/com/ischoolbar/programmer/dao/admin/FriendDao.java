@@ -49,4 +49,11 @@ public interface FriendDao {
      * @return   返回信息
      */
     int deleteFriendByID(int id);
+
+    /**
+     * 按用户名查找关联个数
+     * @param friend 好友信息
+     * @return       返回信息
+     */
+    int findFriendCountByUserName(Friend friend);
 }
