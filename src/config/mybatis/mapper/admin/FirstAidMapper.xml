@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http:mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ischoolbar.programmer.dao.admin.FirstAidDao">
+
+    <!-- 急救信息列表 -->
+    <resultMap id="firstAidResultMap" type="FirstAid">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="phone" property="phone"/>
+        <result column="gender" property="gender"/>
+        <result column="address" property="address"/>
+        <result column="diseaseName" property="diseaseName"/>
+        <result column="diseaseInfo" property="diseaseInfo"/>
+        <result column="currentAddress" property="currentAddress"/>
+        <result column="state" property="state"/>
+    </resultMap>
+
+    <!-- 按用户名查找急救信息 -->
+    <select id="findFirstAidListByUserName" parameterType="String" resultMap="firstAidResultMap">
+        select * from tb_aid where username = #{username}
+    </select>
+
+    <!-- 按ID删除急救信息 -->
+    <delete id="deleteFirstAidById" parameterType="int">
+        delete from tb_aid where id = #{id}
+    </delete>
+
+    <!-- 添加急救信息 -->
+    <insert id="insertFirstAid" parameterType="FirstAid">
+        insert into tb_aid(id,username,name,age,phone,gender,address,diseaseName,diseaseInfo,currentAddress,state)
+        values(null,#{username},#{name},#{age},#{phone},#{gender},#{address},#{diseaseName},#{diseaseInfo},#{currentAddress},#{state})
+    </insert>
+</mapper>
