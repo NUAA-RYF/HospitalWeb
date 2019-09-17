@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
@@ -28,33 +29,44 @@
                     <div class="login-form row">
                         <div class="col-sm-12 text-center login-header">
                             <i class="login-logo fa fa-connectdevelop fa-5x"></i>
-                            <h4 class="login-title">Flat Admin V2</h4>
+                            <h4 class="login-title">后台信息管理登录</h4>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="login-body">
-                                <div class="progress hidden" id="login-progress">
-                                    <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                        Log In...
-                                    </div>
-                                </div>
-                                <form>
-                                    <div class="control">
-                                        <label>
-                                            <input type="text" class="form-control" value="admin@gmail.com" />
+                        <div class="col-sm-12" >
+                            <div class="login-body" style="border-radius: 10px;background-color: rgba(255,255,255,0.75);">
+                                <form class="form-horizontal">
+                                    <div class="form-group" style="margin-bottom: 0">
+                                        <label for="username" class="control-label col-sm-2">
+                                            <i class="fa fa-user fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
                                         </label>
+                                        <div class="col-sm-9">
+                                            <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="username" name="username" type="text" class="form-control" placeholder="请输入账号" />
+                                        </div>
                                     </div>
-                                    <div class="control">
-                                        <label>
-                                            <input type="password" class="form-control" value="123456" />
+                                    <div class="form-group" style="margin-bottom: 0">
+                                        <label for="password" class="col-sm-2 control-label">
+                                            <i class="fa fa-unlock-alt fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
                                         </label>
+                                        <div class="col-sm-9">
+                                            <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="password" name="password" type="password" class="form-control" placeholder="请输入密码" />
+                                        </div>
                                     </div>
-                                    <div class="login-button text-center">
-                                        <input type="submit" class="btn btn-primary" value="Login">
+                                    <div class="form-group">
+                                        <label for="verification" class="control-label col-sm-2">
+                                            <i class="fa fa-shield fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
+                                        </label>
+                                        <div class="col-sm-5">
+                                            <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="verification" name="verification" type="text" class="form-control" placeholder="验证码"/>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <img id="verifyImg" style="cursor: pointer;margin-top: 10px" onclick="changeCpacha()" src="${pageContext.request.contextPath}/system/getCpachaUtil?type=loginCpacha" alt="验证码图片"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <button id="login-btn" style="border-radius: 20px;width: 100%;" type="submit" class="btn btn-primary" onclick="login()">登录</button>
+                                        </div>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="login-footer">
-                                <span class="text-right"><a href="#" class="color-white">Forgot password?</a></span>
                             </div>
                         </div>
                     </div>
@@ -79,13 +91,13 @@
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script type="text/javascript">
             function changeCpacha() {
-                $("#cpacha-img").attr("src", 'getCpachaUtil?vl=4&w=110&h=30&type=loginCpacha&t=' + new Date().getTime());
+                $("#verifyImg").attr("src", 'system/getCpachaUtil?type=loginCpacha&t=' + new Date().getTime());
             }
 
-            document.querySelector(".login-button").onclick = function () {
+            function login() {
                 var username = $("#username").val();
                 var password = $("#password").val();
-                var cpacha = $("#cpacha").val();
+                var verification = $("#verification").val();
                 if (username === '' || username === 'undefined') {
                     alert("请填写用户名!");
                     return;
@@ -94,24 +106,21 @@
                     alert("请填写密码!");
                     return;
                 }
-                if (cpacha === '' || cpacha === 'undefined') {
+                if (verification === '' || verification === 'undefined') {
                     alert("请填写验证码!");
                     return;
                 }
-                document.querySelector(".login").style.display = "none";
-
                 $.ajax({
-                    url: 'login',
-                    data: {username: username, password: password, cpacha: cpacha},
-                    type: 'post',
-                    dataType: 'json',
+                    url: "/system/loginAction",
+                    type: "POST",
+                    dataType: "json",
+                    data: {username: username, password: password, verification: verification},
                     success: function (data) {
                         if (data.type === 'success') {
                             //若登录成功
                             window.location = 'index';
                         } else {
                             //若登录失败
-                            document.querySelector(".login").style.display = "block";
                             alert(data.msg);
                             changeCpacha();
                         }

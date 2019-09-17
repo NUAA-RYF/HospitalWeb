@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             String header = request.getHeader("X-Request-With");
             //是否为Ajax请求
             if (header.equals("XMLHttpRequest")){
-                Map<String,String> ret = new HashMap<String,String>();
+                Map<String,String> ret = new HashMap<>();
                 ret.put("type","error");
                 ret.put("msg","请重新登陆!");
                 response.getWriter().write(JSONObject.fromObject(ret).toString());

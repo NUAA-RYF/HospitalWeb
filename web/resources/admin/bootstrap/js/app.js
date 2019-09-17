@@ -10,7 +10,7 @@ $(function() {
 });
 
 $(function() {
-  return $('select').select2();
+  return $('select').select();
 });
 
 $(function() {

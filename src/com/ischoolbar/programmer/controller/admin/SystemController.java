@@ -94,18 +94,18 @@ public class SystemController {
     }
 
     /**
-     * 登录表单提交处理
-     * @param user 用户
-     * @param cpacha 验证码
-     * @return 返回映射
+     * 登录表单处理
+     * @param verification 验证码
+     * @param request 请求
+     * @return 返回信息
      */
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/loginAction",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> loginAction(User user,String cpacha,HttpServletRequest request)  {
+    public Map<String,String> loginAction(User user,String verification,HttpServletRequest request)  {
         Map<String,String> ret = new HashMap<>();
         if (user == null){
             ret.put("type","error");
-            ret.put("msg","请填写用户信息!");
+            ret.put("msg","超时,用户不得为空!");
             return ret;
         }
         Object loginCpacha = request.getSession().getAttribute("loginCpacha");
@@ -114,7 +114,7 @@ public class SystemController {
             ret.put("msg","超时,请刷新页面!");
             return ret;
         }
-        boolean cpachaIsCorrect = !cpacha.toUpperCase().equals(loginCpacha.toString().toUpperCase());
+        boolean cpachaIsCorrect = !verification.toUpperCase().equals(loginCpacha.toString().toUpperCase());
         if (cpachaIsCorrect){
             ret.put("type","error");
             ret.put("msg","验证码错误!");
@@ -137,10 +137,4 @@ public class SystemController {
         ret.put("msg","登录成功!");
         return ret;
     }
-
-
-
-
-
-
 }
