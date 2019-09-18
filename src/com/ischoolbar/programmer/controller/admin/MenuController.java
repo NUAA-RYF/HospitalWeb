@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MenuController {
 
-    @RequestMapping(value = "clientUserList",method = RequestMethod.GET)
+    @RequestMapping(value = "/clientUserList",method = RequestMethod.GET)
     public ModelAndView list(ModelAndView model){
         model.setViewName("system/clientUserList");
         return model;

@@ -30,5 +30,7 @@
     <orderEntry type="library" exported="" name="jquery-3.2.1" level="application" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="jquery-3.2.1" level="application" />
+    <orderEntry type="library" name="bootstrap-table" level="application" />
+    <orderEntry type="library" name="bootstrap-table-zh-CN" level="application" />
   </component>
 </module>

@@ -24,13 +24,15 @@ public class LoginInterceptor implements HandlerInterceptor {
             //未登录或者登录失效
             String header = request.getHeader("X-Request-With");
             //是否为Ajax请求
+            Map<String,String> ret = new HashMap<>();
             if (header.equals("XMLHttpRequest")){
-                Map<String,String> ret = new HashMap<>();
                 ret.put("type","error");
                 ret.put("msg","请重新登陆!");
                 response.getWriter().write(JSONObject.fromObject(ret).toString());
                 return false;
             }
+            ret.put("type","error");
+            ret.put("msg","请重新登陆!");
             response.sendRedirect(request.getServletContext().getContextPath()+"/system/login");
             return false;
         }

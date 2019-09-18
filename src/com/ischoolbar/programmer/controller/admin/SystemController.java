@@ -3,6 +3,7 @@ package com.ischoolbar.programmer.controller.admin;
 import com.ischoolbar.programmer.entity.admin.User;
 import com.ischoolbar.programmer.service.admin.UserService;
 import com.ischoolbar.programmer.util.CpachaUtil;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,10 +100,10 @@ public class SystemController {
      * @param request 请求
      * @return 返回信息
      */
-    @RequestMapping(value = "/loginAction",method = RequestMethod.POST)
+    @RequestMapping(value = "/signIn",method = RequestMethod.POST)
     @ResponseBody
-    public Map<String,String> loginAction(User user,String verification,HttpServletRequest request)  {
-        Map<String,String> ret = new HashMap<>();
+    public JSONObject loginAction(User user, String verification, HttpServletRequest request)  {
+        JSONObject ret = new JSONObject();
         if (user == null){
             ret.put("type","error");
             ret.put("msg","超时,用户不得为空!");

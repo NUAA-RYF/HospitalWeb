@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
-        <title>Login</title>
+        <title>后台信息管理登录</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="../">
         <!-- Fonts -->
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="verification" class="control-label col-sm-2">
-                                            <i class="fa fa-shield fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
+                                            <i class="fa fa-shield fa-2x" style="margin-top: 4px;" aria-hidden="true"></i>
                                         </label>
                                         <div class="col-sm-5">
                                             <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="verification" name="verification" type="text" class="form-control" placeholder="验证码"/>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-8 col-sm-offset-2">
-                                            <button id="login-btn" style="border-radius: 20px;width: 100%;" type="submit" class="btn btn-primary" onclick="login()">登录</button>
+                                            <button id="login-btn" style="border:none;border-radius: 20px;width: 100%;height: 30px;transition-duration: .5s;" class="btn-primary" type="button">登录</button>
                                         </div>
                                     </div>
                                 </form>
@@ -88,13 +88,13 @@
         <script type="text/javascript" src="resources/admin/bootstrap/lib/js/ace/theme-github.js"></script>
         <!-- Javascript -->
         <script type="text/javascript" src="resources/admin/bootstrap/js/app.js"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="resources/admin/jquery-3.4.1/jquery-3.4.1.min.js"></script>
         <script type="text/javascript">
             function changeCpacha() {
                 $("#verifyImg").attr("src", 'system/getCpachaUtil?type=loginCpacha&t=' + new Date().getTime());
             }
 
-            function login() {
+            $("#login-btn").click(function() {
                 var username = $("#username").val();
                 var password = $("#password").val();
                 var verification = $("#verification").val();
@@ -111,14 +111,14 @@
                     return;
                 }
                 $.ajax({
-                    url: "/system/loginAction",
+                    url: "${pageContext.request.contextPath}/system/signIn",
                     type: "POST",
                     dataType: "json",
                     data: {username: username, password: password, verification: verification},
                     success: function (data) {
                         if (data.type === 'success') {
                             //若登录成功
-                            window.location = 'index';
+                            window.location = '${pageContext.request.contextPath}/system/index';
                         } else {
                             //若登录失败
                             alert(data.msg);
@@ -126,7 +126,7 @@
                         }
                     }
                 });
-            }
+            });
         </script>
     </body>
 </html>
