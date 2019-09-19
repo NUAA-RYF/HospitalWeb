@@ -95,9 +95,9 @@
             }
 
             $("#login-btn").click(function() {
-                var username = $("#username").val();
-                var password = $("#password").val();
-                var verification = $("#verification").val();
+                let username = $("#username").val();
+                let password = $("#password").val();
+                let verification = $("#verification").val();
                 if (username === '' || username === 'undefined') {
                     alert("请填写用户名!");
                     return;

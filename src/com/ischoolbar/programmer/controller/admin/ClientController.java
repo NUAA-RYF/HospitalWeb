@@ -1,6 +1,7 @@
 package com.ischoolbar.programmer.controller.admin;
 
 import com.ischoolbar.programmer.entity.admin.ClientUser;
+import com.ischoolbar.programmer.entity.admin.User;
 import com.ischoolbar.programmer.service.admin.ClientUserService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,27 @@ public class ClientController {
         ret.put("msg","注册成功!");
         ret.put("id",mClientUser.getId());
         return ret;
+    }
+
+    /**
+     * 按用户ID更新用户信息
+     * @param clientUser 用户信息
+     * @return           返回信息
+     */
+    @RequestMapping(value = "/clientUserEdit",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject clientUserEdit(ClientUser clientUser){
+        return clientUserService.clientUserEdit(clientUser);
+    }
+
+    /**
+     * 按用户ID删除用户
+     * @param id 用户ID
+     * @return 返回信息
+     */
+    @RequestMapping(value = "/clientUserDeleteByID",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject clientUserDeleteByID(String id){
+        return clientUserService.clientUserDeleteByID(id);
     }
 }

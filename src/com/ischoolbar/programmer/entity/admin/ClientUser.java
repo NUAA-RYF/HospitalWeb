@@ -4,16 +4,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClientUser {
-    private long id;
+    private int id;
     private String username;
     private String password;
     private String phone;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

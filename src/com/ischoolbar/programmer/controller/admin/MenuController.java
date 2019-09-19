@@ -14,9 +14,25 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MenuController {
 
+    /**
+     * 客户端用户信息列表
+     * @param model 视图
+     * @return 返回视图
+     */
     @RequestMapping(value = "/clientUserList",method = RequestMethod.GET)
-    public ModelAndView list(ModelAndView model){
+    public ModelAndView clientList(ModelAndView model){
         model.setViewName("system/clientUserList");
+        return model;
+    }
+
+    /**
+     * 客户端疾病信息列表
+     * @param model 视图
+     * @return 返回视图
+     */
+    @RequestMapping(value = "/diseaseList",method = RequestMethod.GET)
+    public ModelAndView diseaseList(ModelAndView model){
+        model.setViewName("system/diseaseList");
         return model;
     }
 }

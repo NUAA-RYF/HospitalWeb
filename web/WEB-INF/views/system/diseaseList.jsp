@@ -51,7 +51,7 @@
                     </button>
                     <ol class="breadcrumb navbar-breadcrumb">
                         <li>客户端信息列表</li>
-                        <li class="active">用户账号列表</li>
+                        <li class="active">用户疾病列表</li>
                     </ol>
                     <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                         <i class="fa fa-th icon"></i>
