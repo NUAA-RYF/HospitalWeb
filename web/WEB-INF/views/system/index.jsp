@@ -147,7 +147,10 @@
                                 <div class="panel-body">
                                     <ul class="nav navbar-nav">
                                         <li>
-                                            <a href="${pageContext.request.contextPath}/system/clientUserList">客户端用户列表</a>
+                                            <a href="${pageContext.request.contextPath}/system/clientUserList">用户账号列表</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/system/diseaseList">用户疾病列表</a>
                                         </li>
                                     </ul>
                                 </div>

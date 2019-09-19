@@ -186,8 +186,8 @@
         <div class="container-fluid">
             <div class="side-body">
                 <div class="page-title">
-                    <span class="title">客户端用户列表</span>
-                    <div class="description">当前使用移动应用端的用户信息</div>
+                    <span class="title">用户疾病列表</span>
+                    <div class="description">移动应用端的疾病信息</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -198,7 +198,7 @@
                                 </div>
                                 <div class="form-inline">
                                     <div class="form-group col-sm-offset-10 col-sm-1" style="margin-top: 8px;">
-                                        <button class="btn btn-primary" onclick="openEditModel()">新增用户</button>
+                                        <button class="btn btn-primary" onclick="openEditModel()">新增疾病</button>
                                     </div>
                                 </div>
                             </div>
@@ -348,7 +348,7 @@
             ajax: function (request) {
                 $.ajax({
                     type: 'get',
-                    url: '${pageContext.request.contextPath}/client/findAll',
+                    url: '${pageContext.request.contextPath}/disease/findAll',
                     success: function (data) {
                         request.success({
                             row: data
@@ -375,37 +375,53 @@
             clickToSelect: true,
             columns: [
                 {
-                    checkbox: true,
-                    width: '10%'
-                },
-                {
                     sortable: true,
-                    width: '15%',
                     field: "id",
-                    title: "用户ID",
+                    title: "疾病信息ID",
                     halign: "center"
                 },
                 {
                     field: "username",
-                    width: '15%',
                     title: "用户名",
                     halign: "center"
                 },
                 {
-                    field: "password",
-                    width: '25%',
-                    title: "密码",
+                    field: "name",
+                    title: "姓名",
+                    halign: "center"
+                },
+                {
+                    field: "age",
+                    title: "年龄",
                     halign: "center"
                 },
                 {
                     field: "phone",
-                    width: '25%',
                     title: "手机号",
                     halign: "center"
                 },
                 {
+                    field: "gender",
+                    title: "性别",
+                    halign: "center"
+                },
+                {
+                    field: "address",
+                    title: "地址",
+                    halign: "center"
+                },
+                {
+                    field: "diseaseName",
+                    title: "疾病名称",
+                    halign: "center"
+                },
+                {
+                    field: "diseaseInfo",
+                    title: "疾病详情",
+                    halign: "center"
+                },
+                {
                     title: "操作",
-                    width: '10%',
                     halign: "center",
                     events: {
                         "click #edit": function (e, value, row) {
