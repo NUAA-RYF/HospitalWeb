@@ -20,7 +20,6 @@
     <!-- CSS App -->
     <link rel="stylesheet" type="text/css" href="resources/admin/bootstrap/css/style.css">
     <link rel="stylesheet" type="text/css" href="resources/admin/bootstrap/css/themes/flat-blue.css">
-    <%-- JS--%>
     <!-- Javascript Libs -->
     <script type="text/javascript" src="resources/admin/bootstrap/lib/js/jquery.min.js"></script>
     <script type="text/javascript" src="resources/admin/bootstrap/lib/js/bootstrap.min.js"></script>
@@ -227,12 +226,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="editModelLabel" class="modal-title">编辑用户信息</h4>
+                <h4 id="editModelLabel" class="modal-title">编辑疾病信息</h4>
             </div>
             <div class="modal-content">
                 <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px;">
                     <div class="form-group">
-                        <label for="id">用户ID:</label>
+                        <label for="id">疾病&nbsp;&nbsp;I&nbsp;D&nbsp;:</label>
                         <input id="id" name="id" type="text" readonly="readonly">
                     </div>
                     <div class="form-group" style="margin-left: 8px;">
@@ -243,12 +242,45 @@
 
                 <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
                     <div class="form-group">
-                        <label for="password">密&nbsp;&nbsp;&nbsp;码:</label>
-                        <input id="password" name="password" type="text">
+                        <label for="name">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;:</label>
+                        <input id="name" name="name" type="text">
                     </div>
                     <div class="form-group" style="margin-left: 8px;">
                         <label for="phone">手机号:</label>
                         <input id="phone" name="phone" type="text">
+                    </div>
+                </div>
+
+                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
+                    <div class="form-group">
+                        <label for="age">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄&nbsp;:</label>
+                        <input id="age" name="age" type="text">
+                    </div>
+                    <div class="form-group" style="margin-left: 8px;">
+                        <label for="gender">性&nbsp;&nbsp;&nbsp;别:</label>
+                        <select id="gender">
+                            <option>请选择</option>
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
+                    <div class="form-group">
+                        <label for="diseaseName">疾病名称:</label>
+                        <input id="diseaseName" name="diseaseName" type="text">
+                    </div>
+                </div>
+
+                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
+                    <label for="address">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:</label>
+                    <div class="form-group">
+                        <textarea id="address" name="address" maxlength="50" required="required" style="resize: none;" type="text"></textarea>
+                    </div>
+                    <label for="diseaseInfo">疾病信息:</label>
+                    <div class="form-group">
+                        <textarea id="diseaseInfo" name="diseaseInfo" maxlength="50" required="required" style="resize: none;" type="text"></textarea>
                     </div>
                 </div>
             </div>
@@ -260,26 +292,26 @@
     </div>
 </div><%--模态框END--%>
 
-<%-- 模态框 编辑 --%>
+<%-- 模态框 删除 --%>
 <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="deleteModelLabel" class="modal-title">正在删除用户(ID:<span id="usernameID"></span>)信息</h4>
+                <h4 id="deleteModelLabel" class="modal-title">正在删除疾病(ID:<span id="diseaseID"></span>)信息</h4>
             </div>
             <div class="modal-content">
                 <div class="col-sm-offset-1" style="margin-top: 8px;">
-                    <p class="modal-info">是否删除用户:<span id="usernameDelete"></span>的所有信息?</p>
+                    <p class="modal-info">是否删除疾病:<span id="diseaseNameDelete"></span>的所有信息?</p>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="btn-delete" onclick="deleteClientUserByID()">删除</button>
+                <button type="button" class="btn btn-primary" id="btn-delete" onclick="deleteDiseaseByID()">删除</button>
             </div>
         </div>
     </div>
-</div><%--模态框END--%>
+</div><%--模态框 删除 END--%>
 <script type="text/javascript">
     window.onload = function () {
         $initTable();
@@ -292,7 +324,12 @@
         $("#id").val("");
         $("#username").val("");
         $("#password").val("");
+        $("#age").val("");
         $("#phone").val("");
+        $("#gender").val("请选择");
+        $("#address").val("");
+        $("#diseaseName").val("");
+        $("#diseaseInfo").val("");
         $('#editModel').modal('show');
     }
 
@@ -302,17 +339,28 @@
     function editData(){
         let id = $("#id").val();
         let username = $("#username").val();
-        let password = $("#password").val();
+        let name = $("#name").val();
+        let age = $("#age").val();
         let phone = $("#phone").val();
+        let gender = $("#gender").val();
+        let address = $("#address").val();
+        let diseaseName = $("#diseaseName").val();
+        let diseaseInfo = $("#diseaseInfo").val();
 
         if(id ===''){
             id = 0;
         }
         //输入不得为空
-        if (username ===''||password===''||phone===''){
+        if (username ===''||name===''||
+            phone===''|| age===''|| address===''||
+            diseaseName===''|| diseaseInfo===''){
             alert("输入不得为空!");
             return;
         }
+        if (gender === '请选择'){
+            alert("请选择性别！");
+        }
+
         //手机号必须为11位
         if (phone.length !== 11){
             alert("手机号必须为11位!");
@@ -321,9 +369,19 @@
 
         //传至后台
         $.ajax({
-            url:"${pageContext.request.contextPath}/client/clientUserEdit",
+            url:"${pageContext.request.contextPath}/disease/editDiseaseByID",
             method:"post",
-            data:{id:id,username:username,password:password,phone:phone},
+            data:{
+                id:id,
+                username:username,
+                name:name,
+                age:age,
+                phone:phone,
+                gender:gender,
+                address:address,
+                diseaseName:diseaseName,
+                diseaseInfo:diseaseInfo
+            },
             dataType:"json",
             success:function (data) {
                 if (data.type === 'success'){
@@ -427,13 +485,18 @@
                         "click #edit": function (e, value, row) {
                             $("#id").val(row.id);
                             $("#username").val(row.username);
-                            $("#password").val(row.password);
+                            $("#name").val(row.name);
+                            $("#age").val(row.age);
                             $("#phone").val(row.phone);
+                            $("#gender").val(row.gender);
+                            $("#address").val(row.address);
+                            $("#diseaseName").val(row.diseaseName);
+                            $("#diseaseInfo").val(row.diseaseInfo);
                             $('#editModel').modal('show');
                         },
                         "click #delete": function (e, value, row) {
-                            $("#usernameDelete").html(row.username);
-                            $("#usernameID").html(row.id);
+                            $("#diseaseNameDelete").html(row.diseaseName);
+                            $("#diseaseID").html(row.id);
                             $('#deleteModel').modal('show');
                         }
                     },
@@ -451,12 +514,11 @@
 
     /**
      * 按ID删除用户信息
-     * @param id ID
      */
-    function deleteClientUserByID() {
-        let id = $("#usernameID").html();
+    function deleteDiseaseByID() {
+        let id = $("#diseaseID").html();
         $.ajax({
-            url:"${pageContext.request.contextPath}/client/clientUserDeleteByID",
+            url:"${pageContext.request.contextPath}/disease/deleteInfo",
             method: "post",
             data: {id:id},
             success:function (data) {
@@ -469,7 +531,6 @@
             }
         })
     }
-
 </script>
 </body>
 

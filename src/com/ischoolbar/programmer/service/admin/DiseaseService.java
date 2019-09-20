@@ -1,5 +1,6 @@
 package com.ischoolbar.programmer.service.admin;
 
+import com.ischoolbar.programmer.entity.admin.Disease;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public interface DiseaseService {
      * @return 返回疾病信息
      */
     JSONObject findAllDiseaseInfo();
+
     /**
      * 按用户名查找疾病信息
      * @param username 用户名
@@ -45,4 +47,11 @@ public interface DiseaseService {
      * @return        返回是否添加成功
      */
     JSONObject saveDiseaseInfo(String disease);
+
+    /**
+     * 按ID编辑疾病信息
+     * @param disease 疾病信息
+     * @return 返回信息
+     */
+    JSONObject editDiseaseByID(Disease disease);
 }

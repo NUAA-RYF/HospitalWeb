@@ -128,14 +128,17 @@
                             </li>
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-table">
-                                    <span class="icon fa fa-table"></span><span class="title">用户列表</span>
+                                    <span class="icon fa fa-table"></span><span class="title">客户端用户列表</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
                                 <div id="dropdown-table" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/system/clientUserList">客户端用户列表</a>
+                                                <a href="${pageContext.request.contextPath}/system/clientUserList">用户帐号列表</a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/system/diseaseList">用户疾病列表</a>
                                             </li>
                                         </ul>
                                     </div>

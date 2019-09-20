@@ -1,5 +1,6 @@
 package com.ischoolbar.programmer.controller.admin;
 
+import com.ischoolbar.programmer.entity.admin.Disease;
 import com.ischoolbar.programmer.service.admin.DiseaseService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ public class DiseaseController {
 
     @Autowired
     private DiseaseService diseaseService;
-
 
     /**
      * 按疾病ID查询疾病信息
@@ -77,7 +77,6 @@ public class DiseaseController {
         return diseaseService.deleteDiseaseInfoById(Integer.parseInt(id));
     }
 
-
     /**
      * 添加疾病信息
      * @param disease 疾病信息
@@ -87,6 +86,17 @@ public class DiseaseController {
     @ResponseBody
     public JSONObject saveDiseaseInfo(String disease){
         return diseaseService.saveDiseaseInfo(disease);
+    }
+
+    /**
+     * 按ID编辑疾病信息
+     * @param disease 疾病信息
+     * @return 返回信息
+     */
+    @RequestMapping(value = "/editDiseaseByID",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editDiseaseByID(Disease disease){
+        return diseaseService.editDiseaseByID(disease);
     }
 
 }

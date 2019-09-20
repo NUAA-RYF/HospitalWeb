@@ -17,7 +17,6 @@ public class DiseaseServiceImpl implements DiseaseService {
     @Autowired
     private DiseaseDao diseaseDao;
 
-
     /**
      * 按疾病ID查询疾病信息
      * @param id 疾病ID
@@ -112,7 +111,6 @@ public class DiseaseServiceImpl implements DiseaseService {
         return ret;
     }
 
-
     /**
      * 添加疾病信息
      * @param diseaseInfo 疾病信息
@@ -131,6 +129,62 @@ public class DiseaseServiceImpl implements DiseaseService {
         ret.put("type","success");
         ret.put("msg","添加信息成功!");
         return ret;
+    }
+
+    /**
+     * 按ID编辑疾病信息
+     * @param disease 疾病信息
+     * @return 返回信息
+     */
+    @Override
+    public JSONObject editDiseaseByID(Disease disease) {
+        JSONObject ret = new JSONObject();
+        if (disease == null){
+            ret.put("type","error");
+            ret.put("msg","输入信息不得为空!");
+            return ret;
+        }
+
+        //手机号判断
+        if (disease.getPhone().length() != 11){
+            ret.put("type","error");
+            ret.put("msg","手机号为11位!");
+            return ret;
+        }else {
+            String phone = disease.getPhone();
+            for (int i = 0; i < 11; i++) {
+                char word = phone.charAt(i);
+                if (word < '0' || word >'9'){
+                    ret.put("type","error");
+                    ret.put("msg","手机号仅能为数字!");
+                    return ret;
+                }
+            }
+        }
+
+        if (disease.getId() == 0){
+            //添加操作
+            int result = diseaseDao.saveDiseaseInfo(disease);
+            if (result <=0){
+                ret.put("type","error");
+                ret.put("msg","疾病信息添加失败!");
+                return ret;
+            }
+            ret.put("type","success");
+            ret.put("msg","疾病信息添加成功!");
+            return ret;
+        }else {
+            //更新操作
+            int result = diseaseDao.updateDiseaseInfoById(disease);
+            if (result <= 0){
+                ret.put("type","error");
+                ret.put("msg","疾病信息更新失败!");
+                return ret;
+            }
+            ret.put("type","success");
+            ret.put("msg","疾病信息更新成功!");
+            return ret;
+        }
     }
 
     /**

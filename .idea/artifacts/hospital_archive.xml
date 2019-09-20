@@ -5,7 +5,8 @@
       <element id="artifact" artifact-name="hospital" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="library" level="application" name="jquery-3.2.1" />
+          <element id="library" level="application" name="bootstrap-table" />
+          <element id="library" level="application" name="bootstrap-table-zh-CN" />
         </element>
       </element>
     </root>

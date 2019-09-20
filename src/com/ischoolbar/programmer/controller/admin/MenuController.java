@@ -35,4 +35,10 @@ public class MenuController {
         model.setViewName("system/diseaseList");
         return model;
     }
+
+    @RequestMapping(value = "/FirstAidList",method = RequestMethod.GET)
+    public ModelAndView FirstAidList(ModelAndView model){
+        model.setViewName("system/diseaseList");
+        return model;
+    }
 }
