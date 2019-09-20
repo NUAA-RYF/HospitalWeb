@@ -167,6 +167,49 @@
             </nav>
         </div>
     </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="side-body">
+                <div class="col-sm-10 col-sm-offset-1" style="margin-top: 100px;">
+
+                    <%--轮播图--%>
+                    <div id="banner" class="carousel slide" data-ride="carousel">
+
+                        <%-- 指示器 --%>
+                        <ol class="carousel-indicators">
+                            <li data-target="#banner" data-slide-to="0" class="active"></li>
+                            <li data-target="#banner" data-slide-to="1"></li>
+                            <li data-target="#banner" data-slide-to="2"></li>
+                        </ol>
+
+                        <%-- 轮播图片 --%>
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active" >
+                                <img src="resources/admin/index/images/banner-1.png" alt="轮播图片-1">
+                            </div>
+                            <div class="item">
+                                <img src="resources/admin/index/images/banner-2.png" alt="轮播图片-2">
+                            </div>
+                            <div class="item">
+                                <img src="resources/admin/index/images/banner-3.png" alt="轮播图片-3">
+                            </div>
+                        </div>
+
+                        <%-- 轮播控制 --%>
+                        <a href="#banner" class="left carousel-control" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a href="#banner" class="right carousel-control" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class="app-footer">
         <div class="wrapper">
             <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up fa-2x"></i></a></span> &copy; 2019

@@ -149,7 +149,7 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a>
+                            <a href="/system/index">
                                 <span class="icon fa fa-tachometer"></span>
                                 <span class="title">后台管理系统</span>
                             </a>
