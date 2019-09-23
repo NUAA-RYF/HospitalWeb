@@ -1,6 +1,7 @@
 package com.ischoolbar.programmer.controller.admin;
 
 import com.ischoolbar.programmer.service.admin.FirstAidService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,6 @@ public class FirstAidController {
         return firstAidService.findFirstAidListByUserName(username);
     }
 
-
     /**
      * 添加急救信息
      * @param firstAidJson 急救信息
@@ -50,6 +50,14 @@ public class FirstAidController {
         return firstAidService.deleteFirstAidById(id);
     }
 
-
+    /**
+     * 按急救信息处理状态查询
+     * @return   返回信息
+     */
+    @RequestMapping(value = "/findFirstAidByState",method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject finFirstAidByState(){
+        return firstAidService.findFirstAidByState();
+    }
 
 }

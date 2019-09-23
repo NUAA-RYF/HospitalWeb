@@ -24,6 +24,11 @@
         select * from tb_aid where username = #{username}
     </select>
 
+    <!-- 按急救信息处理状态查询 -->
+    <select id="findFirstAidListByState" parameterType="int" resultMap="firstAidResultMap">
+        select * from tb_aid where state = #{state}
+    </select>
+
     <!-- 按ID删除急救信息 -->
     <delete id="deleteFirstAidById" parameterType="int">
         delete from tb_aid where id = #{id}

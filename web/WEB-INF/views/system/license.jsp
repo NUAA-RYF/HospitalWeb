@@ -140,6 +140,9 @@
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/system/diseaseList">用户疾病列表</a>
                                             </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/system/FirstAidList">用户急救列表</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

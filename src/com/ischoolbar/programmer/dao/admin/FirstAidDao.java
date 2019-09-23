@@ -28,4 +28,10 @@ public interface FirstAidDao {
      * @return   返回信息
      */
     int deleteFirstAidById(int id);
+
+    /**
+     * 按急救信息处理状态查询
+     * @return   返回信息
+     */
+    List<FirstAid> findFirstAidListByState(int state);
 }

@@ -20,8 +20,9 @@ public class FriendServiceImpl implements FriendService {
 
     /**
      * 按用户名查找好友列表信息
+     *
      * @param username 用户名
-     * @return         返回信息
+     * @return 返回信息
      */
     @Override
     public JSONObject findFriendListByUserName(String username) {
@@ -38,20 +39,21 @@ public class FriendServiceImpl implements FriendService {
         }
         ret.put("type", "success");
         ret.put("msg", "查询成功!");
-        ret.put("result",result);
+        ret.put("result", result);
         return ret;
     }
 
     /**
      * 按ID查找好友信息
+     *
      * @param id ID
-     * @return   返回好友信息
+     * @return 返回好友信息
      */
     @Override
     public JSONObject findFriendByID(int id) {
         JSONObject ret = new JSONObject();
         Friend friend = friendDao.findFriendByID(id);
-        if (friend == null){
+        if (friend == null) {
             ret.put("type", "error");
             ret.put("msg", "此好友信息为空!");
             return ret;
@@ -64,15 +66,16 @@ public class FriendServiceImpl implements FriendService {
 
     /**
      * 添加好友信息
+     *
      * @param friendJson 好友信息
-     * @return           返回信息
+     * @return 返回信息
      */
     @Override
     public JSONObject insertFriend(String friendJson) {
         JSONObject ret = new JSONObject();
-        Friend friend = new Gson().fromJson(friendJson,Friend.class);
+        Friend friend = new Gson().fromJson(friendJson, Friend.class);
         int result = friendDao.insertFriend(friend);
-        if (result <= 0){
+        if (result <= 0) {
             ret.put("type", "error");
             ret.put("msg", "插入失败!");
             return ret;
@@ -84,15 +87,16 @@ public class FriendServiceImpl implements FriendService {
 
     /**
      * 更新好友信息
+     *
      * @param friendJson 好友信息
-     * @return           返回信息
+     * @return 返回信息
      */
     @Override
     public JSONObject updateFriendByID(String friendJson) {
         JSONObject ret = new JSONObject();
-        Friend friend = new Gson().fromJson(friendJson,Friend.class);
+        Friend friend = new Gson().fromJson(friendJson, Friend.class);
         int result = friendDao.updateFriendByID(friend);
-        if (result <= 0){
+        if (result <= 0) {
             ret.put("type", "error");
             ret.put("msg", "好友信息更新失败!");
             return ret;
@@ -104,26 +108,27 @@ public class FriendServiceImpl implements FriendService {
 
     /**
      * 更新好友关联状态
+     *
      * @param id    好友ID
      * @param close 关联信息
-     * @return      返回信息
+     * @return 返回信息
      */
     @Override
-    public JSONObject updateFriendClose(int id, boolean close) {
+    public JSONObject updateFriendClose(int id, String username, boolean close) {
         JSONObject ret = new JSONObject();
         Friend friend = new Friend();
         friend.setId(id);
         friend.setClose(close);
-        if (close){
-            int result = friendDao.findFriendCountByUserName(friend);
-            if (result >= 5){
+        if (close) {
+            List<Friend> list = friendDao.findFriendListByUserName(username);
+            if (list.size() > 3) {
                 ret.put("type", "error");
-                ret.put("msg", "关联人数不得超过5人,关联更新失败!");
+                ret.put("msg", "关联人数不得超过3人,关联更新失败!");
                 return ret;
             }
         }
         int result = friendDao.updateFriendClose(friend);
-        if (result <= 0){
+        if (result <= 0) {
             ret.put("type", "error");
             ret.put("msg", "关联更新失败!");
             return ret;
@@ -135,14 +140,15 @@ public class FriendServiceImpl implements FriendService {
 
     /**
      * 按ID删除好友信息
+     *
      * @param id ID
-     * @return   返回信息
+     * @return 返回信息
      */
     @Override
     public JSONObject deleteFriendByID(int id) {
         JSONObject ret = new JSONObject();
         int result = friendDao.deleteFriendByID(id);
-        if (result <= 0){
+        if (result <= 0) {
             ret.put("type", "error");
             ret.put("msg", "删除好友信息失败!");
             return ret;

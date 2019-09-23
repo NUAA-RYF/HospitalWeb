@@ -40,7 +40,7 @@ public interface FriendService {
      * @param close 关联信息
      * @return      返回信息
      */
-    JSONObject updateFriendClose(int id,boolean close);
+    JSONObject updateFriendClose(int id,String username,boolean close);
 
     /**
      * 按ID删除好友信息

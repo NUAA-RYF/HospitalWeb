@@ -152,6 +152,9 @@
                                         <li>
                                             <a href="${pageContext.request.contextPath}/system/diseaseList">用户疾病列表</a>
                                         </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/system/FirstAidList">用户急救列表</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -171,10 +174,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="side-body">
-                <div class="col-sm-10 col-sm-offset-1" style="margin-top: 100px;">
-
+                <div class="col-sm-8" style="margin-top: 80px;">
                     <%--轮播图--%>
-                    <div id="banner" class="carousel slide" data-ride="carousel">
+                    <div id="banner" class="carousel slide" data-ride="carousel" style="height: 450px; border-radius: 10px;">
 
                         <%-- 指示器 --%>
                         <ol class="carousel-indicators">
@@ -184,9 +186,9 @@
                         </ol>
 
                         <%-- 轮播图片 --%>
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active" >
-                                <img src="resources/admin/index/images/banner-1.png" alt="轮播图片-1">
+                        <div class="carousel-inner" role="listbox" style="height: 450px;  border-radius: 10px;" >
+                            <div class="item active">
+                                <img src="resources/admin/index/images/banner-1.png" style="height: 450px;" alt="轮播图片-1">
                             </div>
                             <div class="item">
                                 <img src="resources/admin/index/images/banner-2.png" alt="轮播图片-2">
@@ -197,14 +199,62 @@
                         </div>
 
                         <%-- 轮播控制 --%>
-                        <a href="#banner" class="left carousel-control" role="button" data-slide="prev">
+                        <a href="#banner" class="left carousel-control" role="button" data-slide="prev" style="border-radius: 10px;">
                             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a href="#banner" class="right carousel-control" role="button" data-slide="next">
+                        <a href="#banner" class="right carousel-control" role="button" data-slide="next" style="border-radius: 10px;">
                             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-4" style="margin-top: 80px;">
+                    <div class="thumbnail" style="border-radius: 10px;">
+                        <img style="border-radius: 10px 10px 0 0;" src="resources/admin/index/images/welcome-0.png" alt="欢迎图片">
+                        <div class="caption" style="font-family: 'monospace','AR PL UKai CN','AR PL UMing CN',sans-serif;">
+                            <h3>后台管理系统</h3>
+                            <p>NUAA CSTUENDTS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-3">
+                        <div class="panel panel-primary text-center" style="border-radius: 3px;">
+                            <div class="panel-heading">
+                                南京航空航天大学
+                            </div>
+                            <div class="panel-body">
+                                <p>此处应有图片</p>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item">指导教师:&nbsp;陈海燕</li>
+                                <li class="list-group-item">姓名:&nbsp;汝一凡</li>
+                                <li class="list-group-item">学号:&nbsp;161610124</li>
+                                <li class="list-group-item">课程:&nbsp;软件工程课程设计</li>
+                                <li class="list-group-item">专业:&nbsp;计算机科学与技术专业</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <div class="panel panel-primary text-center" style="border-radius: 3px;">
+                            <div class="panel-heading">
+                                南京航空航天大学
+                            </div>
+                            <div class="panel-body">
+                                <p>此处应有图片</p>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item">指导教师:&nbsp;陈海燕</li>
+                                <li class="list-group-item">姓名:&nbsp;唐统私</li>
+                                <li class="list-group-item">学号:&nbsp;161610122</li>
+                                <li class="list-group-item">课程:&nbsp;软件工程课程设计</li>
+                                <li class="list-group-item">专业:&nbsp;计算机科学与技术专业</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

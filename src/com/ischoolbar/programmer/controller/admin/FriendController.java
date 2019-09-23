@@ -73,8 +73,8 @@ public class FriendController {
      */
     @RequestMapping(value = "/updateFriendClose",method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject updateFriendClose(int id,boolean close){
-        return friendService.updateFriendClose(id,close);
+    public JSONObject updateFriendClose(int id,String username,boolean close){
+        return friendService.updateFriendClose(id,username,close);
     }
 
     /**

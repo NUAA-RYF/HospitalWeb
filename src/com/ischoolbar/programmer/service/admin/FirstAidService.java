@@ -26,4 +26,10 @@ public interface FirstAidService {
      * @return   返回信息
      */
     JSONObject deleteFirstAidById(String id);
+
+    /**
+     * 按急救信息处理状态查询
+     * @return   返回信息
+     */
+    JSONObject findFirstAidByState();
 }

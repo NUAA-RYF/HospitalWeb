@@ -50,7 +50,7 @@
                     </button>
                     <ol class="breadcrumb navbar-breadcrumb">
                         <li>客户端信息列表</li>
-                        <li class="active">用户疾病列表</li>
+                        <li class="active">用户急救列表</li>
                     </ol>
                     <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                         <i class="fa fa-th icon"></i>
@@ -68,8 +68,7 @@
                             </i>
                         </a>
                         <ul class="dropdown-menu animated fadeInDown">
-                            <li class="title">Notification<span class="badge pull-right">0</span>
-                            </li>
+                            <li class="title">Notification<span class="badge pull-right">0</span></li>
                             <li class="message">No new notification</li>
                         </ul>
                     </li>
@@ -189,8 +188,8 @@
         <div class="container-fluid">
             <div class="side-body">
                 <div class="page-title">
-                    <span class="title">用户疾病列表</span>
-                    <div class="description">移动应用端的疾病信息</div>
+                    <span class="title">用户急救列表</span>
+                    <div class="description">移动应用端的急救信息</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
@@ -199,15 +198,9 @@
                                 <div class="card-title">
                                     <div class="title">表格</div>
                                 </div>
-                                <div class="form-inline">
-                                    <div class="form-group col-sm-offset-10 col-sm-1" style="margin-top: 8px;">
-                                        <button class="btn btn-primary" onclick="openEditModel()">新增疾病</button>
-                                    </div>
-                                </div>
                             </div>
                             <div class="card-body">
-                                <table class="table table-hover" id="clientTable">
-                                </table>
+                                <table class="table table-hover" id="clientTable"></table>
                             </div>
                         </div>
                     </div>
@@ -224,73 +217,104 @@
     </footer>
 </div>
 
-<%-- 模态框 编辑 --%>
+<%-- 模态框 查看 --%>
 <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModelLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="editModelLabel" class="modal-title">编辑疾病信息</h4>
+                <h4 id="editModelLabel" class="modal-title">急救信息(ID):<span id="firstAidID"></span></h4>
             </div>
             <div class="modal-content">
-                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px;">
-                    <div class="form-group">
-                        <label for="id">疾病&nbsp;&nbsp;I&nbsp;D&nbsp;:</label>
-                        <input id="id" name="id" type="text" readonly="readonly">
-                    </div>
-                    <div class="form-group" style="margin-left: 8px;">
-                        <label for="username">用户名:</label>
-                        <input id="username" name="username" type="text">
-                    </div>
-                </div>
-
-                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
-                    <div class="form-group">
-                        <label for="name">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;:</label>
-                        <input id="name" name="name" type="text">
-                    </div>
-                    <div class="form-group" style="margin-left: 8px;">
-                        <label for="phone">手机号:</label>
-                        <input id="phone" name="phone" type="text">
+                <%-- 第一行 --%>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="username" class="text-left">用户名:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="username"></p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
-                    <div class="form-group">
-                        <label for="age">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄&nbsp;:</label>
-                        <input id="age" name="age" type="text">
-                    </div>
-                    <div class="form-group" style="margin-left: 8px;">
-                        <label for="gender">性&nbsp;&nbsp;&nbsp;别:</label>
-                        <select id="gender">
-                            <option>请选择</option>
-                            <option>男</option>
-                            <option>女</option>
-                        </select>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="name">姓名:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="name"></p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
-                    <div class="form-group">
-                        <label for="diseaseName">疾病名称:</label>
-                        <input id="diseaseName" name="diseaseName" type="text">
+                <%-- 第二行 --%>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="age" class="text-left">年龄:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="age"></p>
+                        </div>
                     </div>
                 </div>
-
-                <div class="form-inline col-sm-10 col-sm-offset-1" style="margin-top: 10px; margin-bottom: 10px">
-                    <label for="address">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:</label>
-                    <div class="form-group">
-                        <textarea id="address" name="address" maxlength="50" required="required" style="resize: none;" type="text"></textarea>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="gender">性别:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="gender"></p>
+                        </div>
                     </div>
-                    <label for="diseaseInfo">疾病信息:</label>
-                    <div class="form-group">
-                        <textarea id="diseaseInfo" name="diseaseInfo" maxlength="50" required="required" style="resize: none;" type="text"></textarea>
+                </div>
+                <%-- 第三行 --%>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="phone" class="text-left">手机号:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="phone"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="address">地址:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="address"></p>
+                        </div>
+                    </div>
+                </div>
+                <%-- 第四行 --%>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="diseaseName" class="text-left">疾病名称:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="diseaseName"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="diseaseInfo">疾病详情:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="diseaseInfo"></p>
+                        </div>
+                    </div>
+                </div>
+                <%-- 第四行 --%>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="currentAddress" class="text-left">当前地址:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="currentAddress"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="form-inline">
+                        <label for="state">处理状态:</label>
+                        <div class="form-group">
+                            <p class="form-control-static" id="state"></p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="btn-submit" onclick="editData()">提交</button>
+                <button type="button" class="btn btn-primary" id="btn-submit" onclick="">处理</button>
             </div>
         </div>
     </div>
@@ -302,16 +326,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 id="deleteModelLabel" class="modal-title">正在删除疾病(ID:<span id="diseaseID"></span>)信息</h4>
+                <h4 id="deleteModelLabel" class="modal-title">正在删除急救(ID:<span id="deleteFirstAidID"></span>)信息</h4>
             </div>
             <div class="modal-content">
                 <div class="col-sm-offset-1" style="margin-top: 8px;">
-                    <p class="modal-info">是否删除疾病:<span id="diseaseNameDelete"></span>的所有信息?</p>
+                    <p class="modal-info">是否删除呼救者:<span id="nameDelete"></span>的急救信息?</p>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="btn-delete" onclick="deleteDiseaseByID()">删除</button>
+                <button type="button" class="btn btn-primary" id="btn-delete" onclick="deleteFirstAidByID()">删除</button>
             </div>
         </div>
     </div>
@@ -322,23 +346,7 @@
     };
 
     /**
-     * 打开模态框
-     */
-    function openEditModel() {
-        $("#id").val("");
-        $("#username").val("");
-        $("#password").val("");
-        $("#age").val("");
-        $("#phone").val("");
-        $("#gender").val("请选择");
-        $("#address").val("");
-        $("#diseaseName").val("");
-        $("#diseaseInfo").val("");
-        $('#editModel').modal('show');
-    }
-
-    /**
-     * 添加和编辑用户信息
+     * 查看急救信息
      */
     function editData(){
         let id = $("#id").val();
@@ -410,12 +418,20 @@
             ajax: function (request) {
                 $.ajax({
                     type: 'get',
-                    url: '${pageContext.request.contextPath}/disease/findAll',
+                    url: '${pageContext.request.contextPath}/firstAid/findFirstAidByState',
                     success: function (data) {
                         request.success({
                             row: data
                         });
                         if (data.type === 'success') {
+                            for (let i = 0; i < data.result.length; i++) {
+                                if (data.result[i].state === 0){
+                                    data.result[i].state = "等待处理";
+                                }
+                                if (data.result[i].state === 1){
+                                    data.result[i].state = "正在处理";
+                                }
+                            }
                             $('#clientTable').bootstrapTable('load', data.result);
                         }
                     }
@@ -483,30 +499,42 @@
                     halign: "center"
                 },
                 {
+                    field: "currentAddress",
+                    title: "当前地址",
+                    halign: "center"
+                },
+                {
+                    field: "state",
+                    title: "处理状态",
+                    halign: "center"
+                },
+                {
                     title: "操作",
                     halign: "center",
                     events: {
                         "click #edit": function (e, value, row) {
-                            $("#id").val(row.id);
-                            $("#username").val(row.username);
-                            $("#name").val(row.name);
-                            $("#age").val(row.age);
-                            $("#phone").val(row.phone);
-                            $("#gender").val(row.gender);
-                            $("#address").val(row.address);
-                            $("#diseaseName").val(row.diseaseName);
-                            $("#diseaseInfo").val(row.diseaseInfo);
+                            $("#firstAidID").html(row.id);
+                            $("#username").html(row.username);
+                            $("#name").html(row.name);
+                            $("#age").html(row.age);
+                            $("#phone").html(row.phone);
+                            $("#gender").html(row.gender);
+                            $("#address").html(row.address);
+                            $("#diseaseName").html(row.diseaseName);
+                            $("#diseaseInfo").html(row.diseaseInfo);
+                            $("#currentAddress").html(row.currentAddress);
+                            $("#state").html(row.state);
                             $('#editModel').modal('show');
                         },
                         "click #delete": function (e, value, row) {
-                            $("#diseaseNameDelete").html(row.diseaseName);
-                            $("#diseaseID").html(row.id);
+                            $("#nameDelete").html(row.name);
+                            $("#deleteFirstAidID").html(row.id);
                             $('#deleteModel').modal('show');
                         }
                     },
                     formatter: function () {
                         let result = "";
-                        result += "<button class='btn btn-primary' data-toggle='model' data-target='#editModel' id='edit'>编辑</button>";
+                        result += "<button class='btn btn-primary' data-toggle='model' data-target='#editModel' id='edit'>查看</button>";
                         result += "<button class='btn btn-primary' data-toggle='model' data-target='#editModel' id='delete' style='margin-left: 6px;'>删除</button>";
                         return result;
                     },
@@ -517,12 +545,12 @@
     };
 
     /**
-     * 按ID删除用户信息
+     * 按ID删除急救信息
      */
-    function deleteDiseaseByID() {
-        let id = $("#diseaseID").html();
+    function deleteFirstAidByID() {
+        let id = $("#firstAidID").html();
         $.ajax({
-            url:"${pageContext.request.contextPath}/disease/deleteInfo",
+            url:"${pageContext.request.contextPath}/firstAid/deleteFirstAid",
             method: "post",
             data: {id:id},
             success:function (data) {

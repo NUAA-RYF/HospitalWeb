@@ -1633,7 +1633,7 @@ body.login-page .login-footer {
 -------------------------------------------------- */
 /* Carousel base class */
 .carousel {
-    height: 500px;
+    height: 300px;
     margin-bottom: 60px;
 }
 
@@ -1644,7 +1644,7 @@ body.login-page .login-footer {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-    height: 500px;
+    height: 300px;
     background-color: #777;
 }
 
@@ -1653,7 +1653,7 @@ body.login-page .login-footer {
     top: 0;
     left: 0;
     min-width: 100%;
-    height: 500px;
+    height: 300px;
 }
 
 /* MARKETING CONTENT

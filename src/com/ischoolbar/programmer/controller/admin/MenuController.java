@@ -36,9 +36,14 @@ public class MenuController {
         return model;
     }
 
+    /**
+     * 客户端急救信息列表
+     * @param model 视图
+     * @return 返回信息
+     */
     @RequestMapping(value = "/FirstAidList",method = RequestMethod.GET)
     public ModelAndView FirstAidList(ModelAndView model){
-        model.setViewName("system/diseaseList");
+        model.setViewName("system/firstAidList");
         return model;
     }
 }

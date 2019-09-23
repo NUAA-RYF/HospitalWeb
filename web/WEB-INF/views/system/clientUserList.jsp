@@ -149,7 +149,7 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/system/index">
+                            <a href="system/index">
                                 <span class="icon fa fa-tachometer"></span>
                                 <span class="title">后台管理系统</span>
                             </a>
@@ -168,6 +168,9 @@
                                         </li>
                                         <li>
                                             <a href="${pageContext.request.contextPath}/system/diseaseList">用户疾病列表</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/system/FirstAidList">用户急救列表</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -374,10 +377,6 @@
             locale: "zh-CN",
             clickToSelect: true,
             columns: [
-                {
-                    checkbox: true,
-                    width: '10%'
-                },
                 {
                     sortable: true,
                     width: '15%',

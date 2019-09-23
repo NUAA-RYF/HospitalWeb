@@ -74,4 +74,27 @@ public class FirstAidServiceImpl implements FirstAidService {
         ret.put("msg","删除成功!");
         return ret;
     }
+
+
+    /**
+     * 按急救信息处理状态查询
+     * @return   返回信息
+     */
+    @Override
+    public JSONObject findFirstAidByState() {
+        JSONObject ret = new JSONObject();
+        JSONArray result = new JSONArray();
+        List<FirstAid> firstAidList_waiting = firstAidDao.findFirstAidListByState(0);
+        if (firstAidList_waiting.size() > 0){
+            result.addAll(firstAidList_waiting);
+        }
+        List<FirstAid> firstAidList_handling = firstAidDao.findFirstAidListByState(1);
+        if (firstAidList_handling.size() > 0){
+            result.addAll(firstAidList_handling);
+        }
+        ret.put("type","success");
+        ret.put("msg","查询急救信息成功!");
+        ret.put("result",result);
+        return ret;
+    }
 }
