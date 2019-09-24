@@ -53,6 +53,8 @@
 
     <!-- 插入疾病信息 -->
     <insert id="saveDiseaseInfo" parameterType="Disease">
-        insert into tb_disease(id,username,name,age,phone,gender,address,diseaseName,diseaseInfo) values(null,#{username},#{name},#{age},#{phone},#{gender},#{address},#{diseaseName},#{diseaseInfo})
+        insert into tb_disease(id,username,name,age,phone,gender,address,diseaseName,diseaseInfo)
+        values(null,#{username},#{name},#{age},#{phone},#{gender},#{address},#{diseaseName},#{diseaseInfo})
     </insert>
+
 </mapper>

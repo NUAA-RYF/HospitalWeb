@@ -39,4 +39,11 @@
         insert into tb_aid(id,username,name,age,phone,gender,address,diseaseName,diseaseInfo,currentAddress,state)
         values(null,#{username},#{name},#{age},#{phone},#{gender},#{address},#{diseaseName},#{diseaseInfo},#{currentAddress},#{state})
     </insert>
+
+    <!-- 按急救ID更新急救状态 -->
+    <update id="updateFirstAidByID" parameterType="FirstAid">
+        update tb_aid
+        set state = #{state}
+        where id = #{id}
+    </update>
 </mapper>

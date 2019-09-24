@@ -191,10 +191,10 @@
                                 <img src="resources/admin/index/images/banner-1.png" style="height: 450px;" alt="轮播图片-1">
                             </div>
                             <div class="item">
-                                <img src="resources/admin/index/images/banner-2.png" alt="轮播图片-2">
+                                <img src="resources/admin/index/images/banner-2.png" style="height: 450px;" alt="轮播图片-2">
                             </div>
                             <div class="item">
-                                <img src="resources/admin/index/images/banner-3.png" alt="轮播图片-3">
+                                <img src="resources/admin/index/images/banner-3.png" style="height: 450px;" alt="轮播图片-3">
                             </div>
                         </div>
 

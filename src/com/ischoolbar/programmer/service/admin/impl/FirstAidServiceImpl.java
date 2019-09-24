@@ -92,9 +92,34 @@ public class FirstAidServiceImpl implements FirstAidService {
         if (firstAidList_handling.size() > 0){
             result.addAll(firstAidList_handling);
         }
+        List<FirstAid> firstAidList_finished = firstAidDao.findFirstAidListByState(2);
+        if (firstAidList_handling.size() > 0){
+            result.addAll(firstAidList_finished);
+        }
         ret.put("type","success");
         ret.put("msg","查询急救信息成功!");
         ret.put("result",result);
+        return ret;
+    }
+
+    /**
+     * 按急救ID更新急救状态
+     * @return   返回信息
+     */
+    @Override
+    public JSONObject updateFirstAidByID(int id, int state) {
+        JSONObject ret = new JSONObject();
+        FirstAid firstAid = new FirstAid();
+        firstAid.setId(id);
+        firstAid.setState(state);
+        int result = firstAidDao.updateFirstAidByID(firstAid);
+        if (result <= 0){
+            ret.put("type","error");
+            ret.put("msg","更新失败!");
+            return ret;
+        }
+        ret.put("type","success");
+        ret.put("msg","更新成功!");
         return ret;
     }
 }

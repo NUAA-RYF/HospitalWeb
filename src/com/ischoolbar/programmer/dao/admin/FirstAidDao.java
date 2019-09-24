@@ -34,4 +34,10 @@ public interface FirstAidDao {
      * @return   返回信息
      */
     List<FirstAid> findFirstAidListByState(int state);
+
+    /**
+     * 按急救ID更新急救状态
+     * @return   返回信息
+     */
+    int updateFirstAidByID(FirstAid firstAid);
 }

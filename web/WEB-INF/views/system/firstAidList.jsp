@@ -33,6 +33,7 @@
     <script type="text/javascript" src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/bootstrap-table@1.15.4/dist/locale/bootstrap-table-zh-CN.min.js"></script>
     <!-- Javascript -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=6e6e51c41bc0867a32d2da9acfe04d1c"></script>
     <script type="text/javascript" src="resources/admin/bootstrap/js/app.js"></script>
 </head>
 <body class="flat-blue">
@@ -226,6 +227,8 @@
                 <h4 id="editModelLabel" class="modal-title">急救信息(ID):<span id="firstAidID"></span></h4>
             </div>
             <div class="modal-content">
+                <div id="map" class="col-sm-10 col-sm-offset-1" style="height: 300px;margin-top: 20px;">
+                </div>
                 <%-- 第一行 --%>
                 <div class="col-sm-5 col-sm-offset-1">
                     <div class="form-inline">
@@ -314,7 +317,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="btn-submit" onclick="">处理</button>
+                <button type="button" class="btn btn-primary" id="btn-submit" onclick="updateData()"></button>
             </div>
         </div>
     </div>
@@ -346,53 +349,25 @@
     };
 
     /**
-     * 查看急救信息
+     * 更新急救信息
      */
-    function editData(){
-        let id = $("#id").val();
-        let username = $("#username").val();
-        let name = $("#name").val();
-        let age = $("#age").val();
-        let phone = $("#phone").val();
-        let gender = $("#gender").val();
-        let address = $("#address").val();
-        let diseaseName = $("#diseaseName").val();
-        let diseaseInfo = $("#diseaseInfo").val();
+    function updateData(){
+        let id = $("#firstAidID").html();
+        let state = $("#state").html();
 
-        if(id ===''){
-            id = 0;
+        if (state === '等待处理'){
+            state = 1;
         }
-        //输入不得为空
-        if (username ===''||name===''||
-            phone===''|| age===''|| address===''||
-            diseaseName===''|| diseaseInfo===''){
-            alert("输入不得为空!");
-            return;
+        if (state === '正在处理'){
+            state = 2;
         }
-        if (gender === '请选择'){
-            alert("请选择性别！");
-        }
-
-        //手机号必须为11位
-        if (phone.length !== 11){
-            alert("手机号必须为11位!");
-            return;
-        }
-
         //传至后台
         $.ajax({
-            url:"${pageContext.request.contextPath}/disease/editDiseaseByID",
+            url:"${pageContext.request.contextPath}/firstAid/updateFirstAidByID",
             method:"post",
             data:{
                 id:id,
-                username:username,
-                name:name,
-                age:age,
-                phone:phone,
-                gender:gender,
-                address:address,
-                diseaseName:diseaseName,
-                diseaseInfo:diseaseInfo
+                state:state
             },
             dataType:"json",
             success:function (data) {
@@ -430,6 +405,9 @@
                                 }
                                 if (data.result[i].state === 1){
                                     data.result[i].state = "正在处理";
+                                }
+                                if (data.result[i].state === 2){
+                                    data.result[i].state = "处理结束";
                                 }
                             }
                             $('#clientTable').bootstrapTable('load', data.result);
@@ -524,6 +502,28 @@
                             $("#diseaseInfo").html(row.diseaseInfo);
                             $("#currentAddress").html(row.currentAddress);
                             $("#state").html(row.state);
+                            var map = new AMap.Map('map',{
+                                zoom:11,
+                                center:[117.000923,36.675807],
+                                viewMode: '3D'
+                            });
+                            //实时路况图层
+                            var trafficLayer = new AMap.TileLayer.Traffic({
+                                zIndex:10
+                            });
+                            map.add(trafficLayer);
+                            if(row.state === "等待处理"){
+                                $('#btn-submit').html("接受处理");
+                                $('#btn-submit').attr('disabled',false);
+                            }
+                            if(row.state === "正在处理"){
+                                $('#btn-submit').html("结束处理");
+                                $('#btn-submit').attr('disabled',false);
+                            }
+                            if(row.state === "处理结束"){
+                                $('#btn-submit').html("处理已结束");
+                                $('#btn-submit').attr('disabled',true);
+                            }
                             $('#editModel').modal('show');
                         },
                         "click #delete": function (e, value, row) {

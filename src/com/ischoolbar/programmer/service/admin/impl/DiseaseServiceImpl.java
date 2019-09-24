@@ -74,7 +74,6 @@ public class DiseaseServiceImpl implements DiseaseService {
         return getDiseaseList(ret, diseaseList);
     }
 
-
     /**
      * 按用户名查找疾病信息
      * @param username 用户名

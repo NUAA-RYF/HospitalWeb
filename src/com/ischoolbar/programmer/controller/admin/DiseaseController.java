@@ -81,6 +81,7 @@ public class DiseaseController {
      * 添加疾病信息
      * @param disease 疾病信息
      * @return        返回信息
+     * /disease/addInfo
      */
     @RequestMapping(value = "/addInfo",method = RequestMethod.POST)
     @ResponseBody

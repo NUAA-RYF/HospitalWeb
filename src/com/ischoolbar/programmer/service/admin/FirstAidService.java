@@ -32,4 +32,10 @@ public interface FirstAidService {
      * @return   返回信息
      */
     JSONObject findFirstAidByState();
+
+    /**
+     * 按急救ID更新急救状态
+     * @return   返回信息
+     */
+    JSONObject updateFirstAidByID(int id,int state);
 }

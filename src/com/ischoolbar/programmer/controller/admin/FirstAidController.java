@@ -60,4 +60,13 @@ public class FirstAidController {
         return firstAidService.findFirstAidByState();
     }
 
+    /**
+     * 按急救ID更新急救状态
+     * @return   返回信息
+     */
+    @RequestMapping(value = "/updateFirstAidByID",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject updateFirstAidByID(int id,int state){
+        return firstAidService.updateFirstAidByID(id,state);
+    }
 }
