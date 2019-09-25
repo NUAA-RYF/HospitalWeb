@@ -221,14 +221,12 @@
                 </div>
 
                 <div class="col-sm-12">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="panel panel-primary text-center" style="border-radius: 3px;">
                             <div class="panel-heading">
                                 南京航空航天大学
                             </div>
-                            <div class="panel-body">
-                                <p>此处应有图片</p>
-                            </div>
+                            <img src="resources/admin/index/images/personal-ryf.jpg" style="width: 100%;height: 300px;" alt="个人图片">
                             <ul class="list-group">
                                 <li class="list-group-item">指导教师:&nbsp;陈海燕</li>
                                 <li class="list-group-item">姓名:&nbsp;汝一凡</li>
@@ -239,14 +237,12 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <div class="panel panel-primary text-center" style="border-radius: 3px;">
                             <div class="panel-heading">
                                 南京航空航天大学
                             </div>
-                            <div class="panel-body">
-                                <p>此处应有图片</p>
-                            </div>
+                            <img src="resources/admin/index/images/personal-tts.jpg" style="width: 100%;height: 300px;" alt="个人图片">
                             <ul class="list-group">
                                 <li class="list-group-item">指导教师:&nbsp;陈海燕</li>
                                 <li class="list-group-item">姓名:&nbsp;唐统私</li>

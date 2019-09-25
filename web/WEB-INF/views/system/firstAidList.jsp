@@ -69,42 +69,11 @@
                             </i>
                         </a>
                         <ul class="dropdown-menu animated fadeInDown">
-                            <li class="title">Notification<span class="badge pull-right">0</span></li>
-                            <li class="message">No new notification</li>
+                            <li class="title">急救信息通知<span class="badge pull-right" id="FANotification"></span></li>
+                            <li class="message" id="FAMessage"></li>
                         </ul>
                     </li>
-                    <li class="dropdown danger">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-star-half-o"></i>4
-                        </a>
-                        <ul class="dropdown-menu danger animated fadeInDown">
-                            <li class="title">Notification<span class="badge pull-right">4</span></li>
-                            <li>
-                                <ul class="list-group notifications">
-                                    <a href="#">
-                                        <li class="list-group-item"><span class="badge">1</span>
-                                            <i class="fa fa-exclamation-circle icon"></i>new registration
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge success">1</span>
-                                            <i class="fa fa-check icon"></i>new orders
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item">
-                                            <span class="badge danger">2</span>
-                                            <i class="fa fa-comments icon"></i>customers messages
-                                        </li>
-                                    </a>
-                                    <a href="#">
-                                        <li class="list-group-item message">view all</li>
-                                    </a>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    <%-- 个人中心 --%>
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily
                             Hart
@@ -344,9 +313,34 @@
     </div>
 </div><%--模态框 删除 END--%>
 <script type="text/javascript">
+    /*let webSocket = new WebSocket("ws://localhost:8080/hospital/websocket");
+    webSocket.onmessage = countFirstAidNumber;
+    function countFirstAidNumber(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/firstAid/findFirstAidNotHandle",
+            method:"get",
+            success:function (data) {
+                if (data.type === 'success'){
+                    if (data.result.length > 0){
+                        $('#FANotification').html(data.result.length);
+                        $('#FAMessage').html("新的急救信息");
+                    }else {
+                        $('#FANotification').html(0);
+                        $('#FAMessage').html("暂无急救信息");
+                    }
+                }
+            },
+        });
+    }
+    window.close = function () {
+        webSocket.close();
+    };*/
+
+
     window.onload = function () {
         $initTable();
     };
+
 
     /**
      * 更新急救信息
@@ -487,6 +481,16 @@
                     halign: "center"
                 },
                 {
+                    field: "latitude",
+                    title: "经度",
+                    halign: "center"
+                },
+                {
+                    field: "longitude",
+                    title: "纬度",
+                    halign: "center"
+                },
+                {
                     title: "操作",
                     halign: "center",
                     events: {
@@ -502,15 +506,29 @@
                             $("#diseaseInfo").html(row.diseaseInfo);
                             $("#currentAddress").html(row.currentAddress);
                             $("#state").html(row.state);
+                            let latitude = row.latitude;
+                            let longitude = row.longitude;
+                            var position = new AMap.LngLat(longitude,latitude);
+                            //高德地图
                             var map = new AMap.Map('map',{
                                 zoom:11,
-                                center:[117.000923,36.675807],
+                                center:position,
                                 viewMode: '3D'
+                            });
+                            //标记点
+                            var point = new AMap.Marker({
+                                position:position
                             });
                             //实时路况图层
                             var trafficLayer = new AMap.TileLayer.Traffic({
                                 zIndex:10
                             });
+                            AMap.plugin('AMap.ToolBar',function(){
+                                //异步加载插件
+                                var toolbar = new AMap.ToolBar();
+                                map.addControl(toolbar);
+                            });
+                            map.add(point);
                             map.add(trafficLayer);
                             if(row.state === "等待处理"){
                                 $('#btn-submit').html("接受处理");

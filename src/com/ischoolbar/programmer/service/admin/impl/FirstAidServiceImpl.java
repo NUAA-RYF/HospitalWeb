@@ -75,7 +75,6 @@ public class FirstAidServiceImpl implements FirstAidService {
         return ret;
     }
 
-
     /**
      * 按急救信息处理状态查询
      * @return   返回信息
@@ -120,6 +119,20 @@ public class FirstAidServiceImpl implements FirstAidService {
         }
         ret.put("type","success");
         ret.put("msg","更新成功!");
+        return ret;
+    }
+
+    /**
+     * 查询未处理的信息
+     * @return   返回信息
+     */
+    @Override
+    public JSONObject findFirstAidNotHandle() {
+        JSONObject ret = new JSONObject();
+        List<FirstAid> notHandle = firstAidDao.findFirstAidListByState(0);
+        ret.put("type","success");
+        ret.put("msg","查询成功!");
+        ret.put("result",notHandle.size());
         return ret;
     }
 }

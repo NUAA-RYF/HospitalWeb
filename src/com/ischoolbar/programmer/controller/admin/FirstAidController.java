@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/firstAid")
 public class FirstAidController {
 
-
     @Autowired
     FirstAidService firstAidService;
 
@@ -69,4 +68,15 @@ public class FirstAidController {
     public JSONObject updateFirstAidByID(int id,int state){
         return firstAidService.updateFirstAidByID(id,state);
     }
+
+    /**
+     * 查询未处理的信息
+     * @return   返回信息
+     */
+    @RequestMapping(value = "/findFirstAidNotHandle",method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject findFirstAidNotHandle(){
+        return firstAidService.findFirstAidNotHandle();
+    }
+
 }
