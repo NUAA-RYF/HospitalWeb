@@ -453,11 +453,14 @@
                 {
                     field: "gender",
                     title: "性别",
+                    width: 5,
                     halign: "center"
                 },
                 {
                     field: "address",
                     title: "地址",
+                    width: 200,
+                    align: "center",
                     halign: "center"
                 },
                 {
@@ -472,22 +475,14 @@
                 },
                 {
                     field: "currentAddress",
+                    width: 200,
                     title: "当前地址",
+                    align: "center",
                     halign: "center"
                 },
                 {
                     field: "state",
                     title: "处理状态",
-                    halign: "center"
-                },
-                {
-                    field: "latitude",
-                    title: "经度",
-                    halign: "center"
-                },
-                {
-                    field: "longitude",
-                    title: "纬度",
                     halign: "center"
                 },
                 {
@@ -566,7 +561,7 @@
      * 按ID删除急救信息
      */
     function deleteFirstAidByID() {
-        let id = $("#firstAidID").html();
+        let id = $("#deleteFirstAidID").html();
         $.ajax({
             url:"${pageContext.request.contextPath}/firstAid/deleteFirstAid",
             method: "post",
