@@ -134,6 +134,9 @@ public class SystemController {
             return ret;
         }
         request.getSession().setAttribute("admin",currentUser);
+        request.getSession().setAttribute("username",currentUser.getUsername());
+        request.getSession().setAttribute("email",currentUser.getEmail());
+        request.getSession().setAttribute("nickname",currentUser.getNickname());
         ret.put("type","success");
         ret.put("msg","登录成功!");
         return ret;

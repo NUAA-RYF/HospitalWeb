@@ -5,6 +5,8 @@
     <title>后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <base href="../">
+    <%-- ICON --%>
+    <link rel="icon" href="resources/admin/index/images/icon-hospital.icon">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
@@ -62,21 +64,28 @@
                         <i class="fa fa-times icon">
                         </i>
                     </button>
-                    <li class="dropdown">
+                    <li class="dropdown danger">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false">
-                            <i class="fa fa-comments-o">
-                            </i>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInDown">
-                            <li class="title">急救信息通知<span class="badge pull-right" id="FANotification"></span></li>
-                            <li class="message" id="FAMessage"></li>
+                           aria-expanded="false"><i class="fa fa-star-half-o" id="FABadge"></i></a>
+                        <ul class="dropdown-menu danger  animated fadeInDown">
+                            <li class="title">急救信息通知<span class="badge pull-right"></span>
+                            </li>
+                            <li>
+                                <ul class="list-group notifications">
+                                    <a href="${pageContext.request.contextPath}/system/FirstAidList">
+                                        <li class="list-group-item">
+                                            <span class="badge danger" id="FANotification"></span>
+                                            <i class="fa fa-exclamation-circle icon" id="FAMessage"></i>
+                                        </li>
+                                    </a>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <%-- 个人中心 --%>
                     <li class="dropdown profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Emily
-                            Hart
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <%= request.getSession().getAttribute("nickname")%>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu animated fadeInDown">
@@ -86,8 +95,9 @@
                             </li>
                             <li>
                                 <div class="profile-info">
-                                    <h4 class="username">管理员用户名</h4>
-                                    <p>emily_hart@email.com</p>
+                                    <h4 class="username"><%= request.getSession().getAttribute("nickname")%></h4>
+                                    <p><%= request.getSession().getAttribute("username")%></p>
+                                    <p><%= request.getSession().getAttribute("email")%></p>
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default">
                                             <i class="fa fa-user"></i>个人信息
@@ -313,32 +323,28 @@
     </div>
 </div><%--模态框 删除 END--%>
 <script type="text/javascript">
-    /*let webSocket = new WebSocket("ws://localhost:8080/hospital/websocket");
-    webSocket.onmessage = countFirstAidNumber;
     function countFirstAidNumber(){
         $.ajax({
             url:"${pageContext.request.contextPath}/firstAid/findFirstAidNotHandle",
             method:"get",
             success:function (data) {
                 if (data.type === 'success'){
-                    if (data.result.length > 0){
-                        $('#FANotification').html(data.result.length);
+                    $('#FANotification').html(data.result);
+                    if (data.result > 0){
+                        $('#FABadge').html("急救");
                         $('#FAMessage').html("新的急救信息");
                     }else {
-                        $('#FANotification').html(0);
                         $('#FAMessage').html("暂无急救信息");
                     }
                 }
             },
         });
     }
-    window.close = function () {
-        webSocket.close();
-    };*/
 
 
     window.onload = function () {
         $initTable();
+        countFirstAidNumber();
     };
 
 
@@ -503,24 +509,24 @@
                             $("#state").html(row.state);
                             let latitude = row.latitude;
                             let longitude = row.longitude;
-                            var position = new AMap.LngLat(longitude,latitude);
+                            let position = new AMap.LngLat(longitude,latitude);
                             //高德地图
-                            var map = new AMap.Map('map',{
+                            let map = new AMap.Map('map',{
                                 zoom:11,
                                 center:position,
                                 viewMode: '3D'
                             });
                             //标记点
-                            var point = new AMap.Marker({
+                            let point = new AMap.Marker({
                                 position:position
                             });
                             //实时路况图层
-                            var trafficLayer = new AMap.TileLayer.Traffic({
+                            let trafficLayer = new AMap.TileLayer.Traffic({
                                 zIndex:10
                             });
                             AMap.plugin('AMap.ToolBar',function(){
                                 //异步加载插件
-                                var toolbar = new AMap.ToolBar();
+                                let toolbar = new AMap.ToolBar();
                                 map.addControl(toolbar);
                             });
                             map.add(point);

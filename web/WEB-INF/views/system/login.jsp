@@ -5,6 +5,8 @@
         <title>后台信息管理登录</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="../">
+        <%-- ICON --%>
+        <link rel="icon" href="resources/admin/index/images/icon-hospital.icon">
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
@@ -24,7 +26,7 @@
 
     <body class="flat-blue login-page">
         <div class="container">
-            <div class="login-box">
+            <div class="login-box" style="top:40%;">
                 <div>
                     <div class="login-form row">
                         <div class="col-sm-12 text-center login-header">
@@ -34,7 +36,7 @@
                         <div class="col-sm-12" >
                             <div class="login-body" style="border-radius: 10px;background-color: rgba(255,255,255,0.75);">
                                 <form class="form-horizontal">
-                                    <div class="form-group" style="margin-bottom: 0">
+                                    <div class="form-group" style="margin-bottom: 0;">
                                         <label for="username" class="control-label col-sm-2">
                                             <i class="fa fa-user fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
                                         </label>
