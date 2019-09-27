@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>CODE:404 找不到页面啦</title>
+	<title>CODE:500 服务器端错误</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<base href="../">
 	<%-- ICON --%>
@@ -26,7 +26,7 @@
 		</div>
 		<div class="content">
 			<div class="inner">
-				<h1>505</h1>
+				<h1>500</h1>
 				<p><!--[-->对不起，服务器端出现错误。不过，放心，一切都在我的掌控之中，不会跑多远！<!--]--></p>
 			</div>
 		</div>

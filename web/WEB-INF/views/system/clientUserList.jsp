@@ -202,7 +202,7 @@
 </div>
 
 <%-- 模态框 编辑 --%>
-<div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModelLabel">
+<div class="modal fade" style="position: absolute;top: 50%;transform:translateY(-50%);" id="editModel" tabindex="-1" role="dialog" aria-labelledby="editModelLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -241,7 +241,7 @@
 </div><%--模态框END--%>
 
 <%-- 模态框 编辑 --%>
-<div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel">
+<div class="modal fade" style="position: absolute;top: 50%;transform:translateY(-50%);" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

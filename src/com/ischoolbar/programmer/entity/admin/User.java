@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @studentID 161610124
  * @date 2019/8/10 9:38
  */
-
 @Component
 public class User {
 

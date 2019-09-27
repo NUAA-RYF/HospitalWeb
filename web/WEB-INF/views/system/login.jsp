@@ -36,36 +36,36 @@
                         <div class="col-sm-12" >
                             <div class="login-body" style="border-radius: 10px;background-color: rgba(255,255,255,0.75);">
                                 <form class="form-horizontal">
-                                    <div class="form-group" style="margin-bottom: 0;">
-                                        <label for="username" class="control-label col-sm-2">
-                                            <i class="fa fa-user fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
-                                        </label>
-                                        <div class="col-sm-9">
-                                            <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="username" name="username" type="text" class="form-control" placeholder="请输入账号" />
+                                    <div class="form-group" style="margin-top: 10px;">
+                                        <label for="username" class="sr-only">请输入用户名</label>
+                                        <div class="input-group col-sm-offset-1 col-sm-10">
+                                            <div class="input-group-addon" style="border:1px solid white;"><i class="glyphicon glyphicon-user"></i></div>
+                                            <input style="border-radius: 0 4px 4px 0;margin:0;background-color: rgba(255,255,255,0.6)" id="username" name="username" type="text" class="form-control" placeholder="请输入账号" />
                                         </div>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 0">
-                                        <label for="password" class="col-sm-2 control-label">
-                                            <i class="fa fa-unlock-alt fa-2x" style="margin-top: 4px" aria-hidden="true"></i>
-                                        </label>
-                                        <div class="col-sm-9">
-                                            <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="password" name="password" type="password" class="form-control" placeholder="请输入密码" />
+                                    <div class="form-group" style="margin-top: 10px;">
+                                        <label for="password" class="sr-only">请输入密码</label>
+                                        <div class="input-group col-sm-offset-1 col-sm-10">
+                                            <div class="input-group-addon" style="border:1px solid white;"><i class="glyphicon glyphicon-lock"></i></div>
+                                            <input style="border-radius: 0 4px 4px 0;margin:0;background-color: rgba(255,255,255,0.6)" id="password" name="password" type="password" class="form-control" placeholder="请输入密码" />
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="verification" class="control-label col-sm-2">
-                                            <i class="fa fa-shield fa-2x" style="margin-top: 4px;" aria-hidden="true"></i>
-                                        </label>
-                                        <div class="col-sm-5">
-                                            <input style="border-radius: 8px;background-color: rgba(255,255,255,0.6)" id="verification" name="verification" type="text" class="form-control" placeholder="验证码"/>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <img id="verifyImg" style="cursor: pointer;margin-top: 10px" onclick="changeCpacha()" src="${pageContext.request.contextPath}/system/getCpachaUtil?type=loginCpacha" alt="验证码图片"/>
+                                    <div class="form-group" style="margin-top: 10px;">
+                                        <label for="verification" class="sr-only">请输入验证码</label>
+                                        <div class="input-group col-sm-offset-1 col-sm-10">
+                                            <div class="input-group-addon" style="border:1px solid white;"><i class="glyphicon glyphicon-check"></i></div>
+                                            <input style="border-radius: 0 4px 4px 0;margin:0;background-color: rgba(255,255,255,0.6)" id="verification" name="verification" type="text" class="form-control" placeholder="验证码"/>
+                                            <div class="input-group-addon" style="border:1px solid white;padding: 0;">
+                                                <img id="verifyImg" style="cursor: pointer;" onclick="changeCpacha()" src="${pageContext.request.contextPath}/system/getCpachaUtil?type=loginCpacha" alt="验证码图片"/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-8 col-sm-offset-2">
-                                            <button id="login-btn" style="border:none;border-radius: 20px;width: 100%;height: 30px;transition-duration: .5s;" class="btn-primary" type="button">登录</button>
+                                            <button id="login-btn" style="border:none;border-radius:5px;width: 100%;height: 30px;transition-duration: .5s;" class="btn-primary" type="button">登录</button>
+                                        </div>
+                                        <div class="col-sm-8 col-sm-offset-2">
+                                            <button id="signUp-btn" style="border:none;border-radius:5px;margin-top:8px;width: 100%;height: 30px;transition-duration: .5s;" class="btn-primary" type="button">注册</button>
                                         </div>
                                     </div>
                                 </form>
@@ -75,6 +75,67 @@
                 </div>
             </div>
         </div>
+
+        <%-- 模态框 编辑 --%>
+        <div class="modal fade" style="position: absolute;top: 50%;transform:translateY(-50%);" id="signUpModel" tabindex="-1" role="dialog" aria-labelledby="signUpModelLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="">注册页面</h4>
+                    </div>
+                    <div class="modal-content">
+                        <%-- 注册表单 --%>
+                        <div class="form-horizontal" style="margin-top: 10px;">
+                            <%-- 账号 --%>
+                            <div class="form-group">
+                                <div class="input-group col-sm-offset-3 col-sm-6">
+                                    <label for="signUp_username" class="sr-only"></label>
+                                    <div class="input-group-addon">账号</div>
+                                    <input type="text" id="signUp_username" class="form-control" placeholder="请输入账号">
+                                </div>
+                            </div>
+                            <%-- 昵称 --%>
+                            <div class="form-group">
+                                <div class="input-group col-sm-offset-3 col-sm-6">
+                                    <label for="signUp_nickname" class="sr-only"></label>
+                                    <div class="input-group-addon">昵称</div>
+                                    <input type="text" id="signUp_nickname" class="form-control" placeholder="请输入昵称">
+                                </div>
+                            </div>
+                            <%-- 密码 --%>
+                            <div class="form-group">
+                                <div class="input-group col-sm-offset-3 col-sm-6">
+                                    <label for="signUp_password" class="sr-only"></label>
+                                    <div class="input-group-addon">密码</div>
+                                    <input type="password" id="signUp_password" class="form-control" placeholder="请输入密码">
+                                </div>
+                            </div>
+                            <%-- 重复密码 --%>
+                            <div class="form-group">
+                                <div class="input-group col-sm-offset-3 col-sm-6">
+                                    <label for="signUp_repeat_password" class="sr-only"></label>
+                                    <div class="input-group-addon">重复密码</div>
+                                    <input type="password" id="signUp_repeat_password" class="form-control" placeholder="请再次输入密码">
+                                </div>
+                            </div>
+                            <%-- 电子邮箱 --%>
+                            <div class="form-group">
+                                <div class="input-group col-sm-offset-3 col-sm-6">
+                                    <label for="signUp_email" class="sr-only"></label>
+                                    <div class="input-group-addon">电子邮箱</div>
+                                    <input type="email" id="signUp_email" class="form-control" placeholder="请输入电子邮箱">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="btn-submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><%--模态框END--%>
         <!-- Javascript Libs -->
         <script type="text/javascript" src="resources/admin/bootstrap/lib/js/jquery.min.js"></script>
         <script type="text/javascript" src="resources/admin/bootstrap/lib/js/bootstrap.min.js"></script>
@@ -90,8 +151,52 @@
         <script type="text/javascript" src="resources/admin/bootstrap/lib/js/ace/theme-github.js"></script>
         <!-- Javascript -->
         <script type="text/javascript" src="resources/admin/bootstrap/js/app.js"></script>
-        <script type="text/javascript" src="resources/admin/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+
         <script type="text/javascript">
+            $('#btn-submit').click(function () {
+
+                let username = $('#signUp_username').val();
+                let nickname = $('#signUp_nickname').val();
+                let password = $('#signUp_password').val();
+                let repeat_password = $('#signUp_repeat_password').val();
+                let email = $('#signUp_email').val();
+
+                if (username ==='' || nickname ==='' || password ==='' || email ===''){
+                    alert("输入均不得为空!");
+                }
+
+                if (password !== repeat_password){
+                    alert("两次输入的密码不一致!");
+                }
+
+                if (password.length < 6 || password.length >18){
+                    alert("密码长度应为6-18位!");
+                }
+
+               $.ajax({
+                   url: "${pageContext.request.contextPath}/user/insertUser",
+                   method:"post",
+                   data: {
+                       username:username,
+                       nickname:nickname,
+                       password:password,
+                       email:email
+                   },
+                   dataType: "json",
+                   success:function (data) {
+                       if (data.type === 'success'){
+                           $('#signUpModel').modal('hide');
+                       }else {
+                           alert(data.msg);
+                       }
+                   }
+               });
+            });
+
+            $('#signUp-btn').click(function () {
+                $('#signUpModel').modal('show');
+            });
+
             function changeCpacha() {
                 $("#verifyImg").attr("src", 'system/getCpachaUtil?type=loginCpacha&t=' + new Date().getTime());
             }

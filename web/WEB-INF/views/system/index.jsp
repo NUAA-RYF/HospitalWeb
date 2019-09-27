@@ -78,9 +78,12 @@
                             </li>
                             <li>
                                 <div class="profile-info">
-                                    <h4 class="username"><%= request.getSession().getAttribute("nickname")%></h4>
-                                    <p><%= request.getSession().getAttribute("username")%></p>
-                                    <p><%= request.getSession().getAttribute("email")%></p>
+                                    <h4 class="username"><%= request.getSession().getAttribute("nickname")%>
+                                    </h4>
+                                    <p><%= request.getSession().getAttribute("username")%>
+                                    </p>
+                                    <p><%= request.getSession().getAttribute("email")%>
+                                    </p>
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default">
                                             <i class="fa fa-user"></i>个人信息
@@ -153,7 +156,8 @@
             <div class="side-body">
                 <div class="col-sm-8" style="margin-top: 80px;">
                     <%--轮播图--%>
-                    <div id="banner" class="carousel slide" data-ride="carousel" style="height: 450px; border-radius: 10px;">
+                    <div id="banner" class="carousel slide" data-ride="carousel"
+                         style="height: 450px; border-radius: 10px;">
 
                         <%-- 指示器 --%>
                         <ol class="carousel-indicators">
@@ -163,24 +167,29 @@
                         </ol>
 
                         <%-- 轮播图片 --%>
-                        <div class="carousel-inner" role="listbox" style="height: 450px;  border-radius: 10px;" >
+                        <div class="carousel-inner" role="listbox" style="height: 450px;  border-radius: 10px;">
                             <div class="item active">
-                                <img src="resources/admin/index/images/banner-1.png" style="height: 450px;" alt="轮播图片-1">
+                                <img src="resources/admin/index/images/banner-1.png" style="height: 450px;"
+                                     alt="轮播图片-1">
                             </div>
                             <div class="item">
-                                <img src="resources/admin/index/images/banner-2.png" style="height: 450px;" alt="轮播图片-2">
+                                <img src="resources/admin/index/images/banner-2.png" style="height: 450px;"
+                                     alt="轮播图片-2">
                             </div>
                             <div class="item">
-                                <img src="resources/admin/index/images/banner-3.png" style="height: 450px;" alt="轮播图片-3">
+                                <img src="resources/admin/index/images/banner-3.png" style="height: 450px;"
+                                     alt="轮播图片-3">
                             </div>
                         </div>
 
                         <%-- 轮播控制 --%>
-                        <a href="#banner" class="left carousel-control" role="button" data-slide="prev" style="border-radius: 10px;">
+                        <a href="#banner" class="left carousel-control" role="button" data-slide="prev"
+                           style="border-radius: 10px;">
                             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
-                        <a href="#banner" class="right carousel-control" role="button" data-slide="next" style="border-radius: 10px;">
+                        <a href="#banner" class="right carousel-control" role="button" data-slide="next"
+                           style="border-radius: 10px;">
                             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
@@ -189,10 +198,16 @@
 
                 <div class="col-sm-4" style="margin-top: 80px;">
                     <div class="thumbnail" style="border-radius: 10px;">
-                        <img style="border-radius: 10px 10px 0 0;" src="resources/admin/index/images/welcome-0.png" alt="欢迎图片">
-                        <div class="caption" style="font-family: 'monospace','AR PL UKai CN','AR PL UMing CN',sans-serif;">
-                            <h3>后台管理系统</h3>
+                        <img style="border-radius: 10px 10px 0 0;" src="resources/admin/index/images/welcome-0.png"
+                             alt="欢迎图片">
+                        <div class="caption text-center"
+                             style="font-family: 'monospace','AR PL UKai CN','AR PL UMing CN',sans-serif;">
+                            <h2>后台管理系统</h2>
                             <p>NUAA CSTUENDTS</p>
+                            <p>前端:Android</p>
+                            <p>前端:JSP+JS+JQUERY+CSS</p>
+                            <p>后端:Spring+SpringMVC+Mybaits</p>
+                            <p id="currentTime"></p>
                         </div>
                     </div>
                 </div>
@@ -203,7 +218,8 @@
                             <div class="panel-heading">
                                 南京航空航天大学
                             </div>
-                            <img src="resources/admin/index/images/personal-ryf.jpg" style="width: 100%;height: 300px;" alt="个人图片">
+                            <img src="resources/admin/index/images/personal-ryf.jpg" style="width: 100%;height: 300px;"
+                                 alt="个人图片">
                             <ul class="list-group">
                                 <li class="list-group-item">指导教师:&nbsp;陈海燕</li>
                                 <li class="list-group-item">姓名:&nbsp;汝一凡</li>
@@ -219,7 +235,8 @@
                             <div class="panel-heading">
                                 南京航空航天大学
                             </div>
-                            <img src="resources/admin/index/images/personal-tts.jpg" style="width: 100%;height: 300px;" alt="个人图片">
+                            <img src="resources/admin/index/images/personal-tts.jpg" style="width: 100%;height: 300px;"
+                                 alt="个人图片">
                             <ul class="list-group">
                                 <li class="list-group-item">指导教师:&nbsp;陈海燕</li>
                                 <li class="list-group-item">姓名:&nbsp;唐统私</li>
@@ -227,6 +244,48 @@
                                 <li class="list-group-item">课程:&nbsp;软件工程课程设计</li>
                                 <li class="list-group-item">专业:&nbsp;计算机科学与技术专业</li>
                             </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="border-radius: 8px 8px 0 0;">
+                        <div class="card-header text-center">
+                            <img src="resources/admin/index/images/bg-chang-an.jpg" style="width: 100%;height: 250px;"
+                                 alt="长安图片">
+                            <h3>更新管理员信息</h3>
+                        </div>
+                        <div class="card-body" style="padding-bottom: 8px;">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="input-group col-sm-offset-3 col-sm-6">
+                                        <label class="sr-only" for="update-username"></label>
+                                        <div class="input-group-addon">用户</div>
+                                        <input id="update-username" class="form-control" type="text" value="${username}"
+                                               disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-sm-offset-3 col-sm-6">
+                                        <label class="sr-only" for="update-nickname"></label>
+                                        <div class="input-group-addon">昵称</div>
+                                        <input id="update-nickname" class="form-control" type="text"
+                                               value="${nickname}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-sm-offset-3 col-sm-6">
+                                        <label class="sr-only" for="update-email"></label>
+                                        <div class="input-group-addon">电子邮箱</div>
+                                        <input id="update-email" class="form-control" value="${email}" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group col-sm-offset-3 col-sm-6">
+                                        <button type="button" id="update-btn" class="btn-primary"
+                                                style="height:35px;width:100%;border: none;border-radius: 8px;">提交
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -256,25 +315,60 @@
 <script type="text/javascript" src="resources/admin/bootstrap/js/app.js"></script>
 <script type="text/javascript" src="resources/admin/bootstrap/js/index.js"></script>
 <script type="text/javascript">
-    function countFirstAidNumber(){
+    function currentTime() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth();
+        let day = date.getDay();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let time = "当前时间:"+year + "年" + month + "月" + day + "日  "+hours+":"+minutes+":"+seconds;
+        $('#currentTime').html(time);
+    };
+
+    $('#update-btn').click(function () {
+        let username = $('#update-username').val();
+        let nickname = $('#update-nickname').val();
+        let email = $('#update-email').val();
+
+        if (nickname === '' || email === '') {
+            alert("输入均不得为空!");
+        }
+
         $.ajax({
-            url:"${pageContext.request.contextPath}/firstAid/findFirstAidNotHandle",
-            method:"get",
-            success:function (data) {
-                if (data.type === 'success'){
+            url: "${pageContext.request.contextPath}/user/updateUser",
+            method: "post",
+            data: {username: username, nickname: nickname, email: email},
+            success: function (data) {
+                if (data.type === 'success') {
+                    location.reload(true);
+                }
+            }
+        });
+    });
+
+    function countFirstAidNumber() {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/firstAid/findFirstAidNotHandle",
+            method: "get",
+            success: function (data) {
+                if (data.type === 'success') {
                     $('#FANotification').html(data.result);
-                    if (data.result > 0){
+                    if (data.result > 0) {
                         $('#FABadge').html("急救");
                         $('#FAMessage').html("新的急救信息");
-                    }else {
+                    } else {
                         $('#FAMessage').html("暂无急救信息");
                     }
                 }
             },
         });
     }
+
     window.onload = function () {
         countFirstAidNumber();
+        setInterval(currentTime,1000);
     };
 </script>
 </body>
